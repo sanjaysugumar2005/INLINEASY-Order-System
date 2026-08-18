@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>INLINEASY | Booking Confirmed</title>
+
+    <!-- QR CODE LIBRARY -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family:
+                "Posterama1919",
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #FFFFFF;
+
+            color: #000000;
+
+            min-height: 100vh;
+
+            padding: 25px 15px;
+
+        }
+
+
+        .container {
+
+            width: 100%;
+
+            max-width: 520px;
+
+            margin: auto;
+
+        }
+
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        .header {
+
+            text-align: center;
+
+            padding: 20px 0 25px;
+
+        }
+
+
+        .logo {
+
+            font-size: 30px;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .logo span {
+
+            color: #00FF42;
+
+        }
+
+
+        .header p {
+
+            color: #777777;
+
+            font-size: 12px;
+
+        }
+
+
+        /* =========================
+           SUCCESS
+        ========================== */
+
+        .success {
+
+            text-align: center;
+
+            background: #FFFFFF;
+
+            border: 1px solid #DCDCDC;
+
+            border-radius: 20px;
+
+            padding: 25px 20px;
+
+            box-shadow:
+                0 12px 35px
+                rgba(0, 0, 0, 0.07);
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .success-icon {
+
+            width: 62px;
+
+            height: 62px;
+
+            margin: auto;
+
+            border-radius: 50%;
+
+            background: #00FF42;
+
+            border: 1px solid #000000;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 30px;
+
+            font-weight: 900;
+
+        }
+
+
+        .success h2 {
+
+            font-size: 21px;
+
+            margin-top: 15px;
+
+        }
+
+
+        .success p {
+
+            color: #777777;
+
+            font-size: 12px;
+
+            margin-top: 7px;
+
+        }
+
+
+        /* =========================
+           TOKEN
+        ========================== */
+
+        .token-card {
+
+            text-align: center;
+
+            background: #FFFFFF;
+
+            border: 1px solid #000000;
+
+            border-radius: 20px;
+
+            padding: 25px;
+
+            margin-bottom: 15px;
+
+            box-shadow:
+                0 12px 35px
+                rgba(0, 0, 0, 0.08);
+
+        }
+
+
+        .token-label {
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 1.5px;
+
+            color: #777777;
+
+        }
+
+
+        .token {
+
+            color: #000000;
+
+            font-size: 42px;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+
+            margin-top: 8px;
+
+        }
+
+
+        .token::first-letter {
+
+            color: #00FF42;
+
+        }
+
+
+        .queue {
+
+            color: #777777;
+
+            font-size: 11px;
+
+            margin-top: 8px;
+
+        }
+
+
+        /* =========================
+           QR CARD
+        ========================== */
+
+        .qr-card {
+
+            text-align: center;
+
+            background: #FFFFFF;
+
+            border: 1px solid #D8D8D8;
+
+            border-radius: 20px;
+
+            padding: 25px;
+
+            margin-bottom: 15px;
+
+            box-shadow:
+                0 12px 35px
+                rgba(0, 0, 0, 0.07);
+
+        }
+
+
+        .qr-card h2 {
+
+            font-size: 18px;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .qr-card p {
+
+            color: #777777;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        #qrcode {
+
+            width: 220px;
+
+            height: 220px;
+
+            padding: 10px;
+
+            margin: auto;
+
+            background: #FFFFFF;
+
+            border: 1px solid #000000;
+
+            border-radius: 15px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+        }
+
+
+        #qrcode img {
+
+            max-width: 100%;
+
+            max-height: 100%;
+
+        }
+
+
+        /* =========================
+           DETAILS
+        ========================== */
+
+        .details {
+
+            background: #FFFFFF;
+
+            border: 1px solid #D8D8D8;
+
+            border-radius: 20px;
+
+            padding: 22px;
+
+            margin-bottom: 15px;
+
+            box-shadow:
+                0 12px 35px
+                rgba(0, 0, 0, 0.06);
+
+        }
+
+
+        .details h2 {
+
+            font-size: 18px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .detail {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 13px 0;
+
+            border-bottom:
+                1px solid #EEEEEE;
+
+        }
+
+
+        .detail:last-child {
+
+            border-bottom: none;
+
+        }
+
+
+        .detail span:first-child {
+
+            color: #777777;
+
+            font-size: 11px;
+
+        }
+
+
+        .detail span:last-child {
+
+            color: #000000;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            text-align: right;
+
+            word-break: break-word;
+
+        }
+
+
+        /* =========================
+           BUTTONS
+        ========================== */
+
+        .button {
+
+            width: 100%;
+
+            min-height: 52px;
+
+            border-radius: 12px;
+
+            font-family: inherit;
+
+            font-size: 12px;
+
+            font-weight: 900;
+
+            letter-spacing: 0.4px;
+
+            cursor: pointer;
+
+            margin-top: 9px;
+
+            transition: 0.2s;
+
+        }
+
+
+        .primary {
+
+            background: #00FF42;
+
+            color: #000000;
+
+            border: 1px solid #000000;
+
+        }
+
+
+        .secondary {
+
+            background: #FFFFFF;
+
+            color: #000000;
+
+            border: 1px solid #000000;
+
+        }
+
+
+        .button:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(0, 0, 0, 0.10);
+
+        }
+
+
+        .button:active {
+
+            transform:
+                translateY(0);
+
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        .footer {
+
+            text-align: center;
+
+            color: #999999;
+
+            font-size: 9px;
+
+            padding: 20px 0 10px;
+
+        }
+
+
+        .footer strong {
+
+            color: #000000;
+
+        }
+
+
+        .footer span {
+
+            color: #00FF42;
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 520px) {
+
+            body {
+
+                padding:
+                    15px 12px;
+
+            }
+
+
+            .header {
+
+                padding-top: 10px;
+
+            }
+
+
+            .logo {
+
+                font-size: 26px;
+
+            }
+
+
+            .success {
+
+                padding:
+                    22px 16px;
+
+            }
+
+
+            .token {
+
+                font-size: 36px;
+
+            }
+
+
+            #qrcode {
+
+                width: 200px;
+
+                height: 200px;
+
+            }
+
+
+            .details {
+
+                padding: 18px;
+
+            }
+
+
+            .detail {
+
+                align-items:
+                    flex-start;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header class="header">
+
+        <div class="logo">
+
+            INLIN<span>E</span>ASY
+
+        </div>
+
+
+        <p>
+
+            Smart Mobility Platform
+
+        </p>
+
+    </header>
+
+
+
+    <!-- =========================
+         SUCCESS
+    ========================== -->
+
+    <section class="success">
+
+        <div class="success-icon">
+
+            ✓
+
+        </div>
+
+
+        <h2>
+
+            Booking Confirmed
+
+        </h2>
+
+
+        <p>
+
+            Your slot has been successfully reserved.
+
+        </p>
+
+    </section>
+
+
+
+    <!-- =========================
+         TOKEN
+    ========================== -->
+
+    <section class="token-card">
+
+        <div class="token-label">
+
+            YOUR TOKEN NUMBER
+
+        </div>
+
+
+        <div
+            class="token"
+            id="tokenNumber">
+
+            CNG-001
+
+        </div>
+
+
+        <div class="queue">
+
+            Keep this token ready when you arrive.
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         QR
+    ========================== -->
+
+    <section class="qr-card">
+
+        <h2>
+
+            Booking QR
+
+        </h2>
+
+
+        <p>
+
+            Show this QR code to the
+            station administrator for verification.
+
+        </p>
+
+
+        <div id="qrcode"></div>
+
+    </section>
+
+
+
+    <!-- =========================
+         BOOKING DETAILS
+    ========================== -->
+
+    <section class="details">
+
+        <h2>
+
+            Booking Details
+
+        </h2>
+
+
+        <div class="detail">
+
+            <span>
+                Car
+            </span>
+
+
+            <span id="carName">
+                -
+            </span>
+
+        </div>
+
+
+        <div class="detail">
+
+            <span>
+                Car Number
+            </span>
+
+
+            <span id="carNumber">
+                -
+            </span>
+
+        </div>
+
+
+        <div class="detail">
+
+            <span>
+                Date
+            </span>
+
+
+            <span id="bookingDate">
+                -
+            </span>
+
+        </div>
+
+
+        <div class="detail">
+
+            <span>
+                Time
+            </span>
+
+
+            <span id="bookingTime">
+                -
+            </span>
+
+        </div>
+
+
+        <div class="detail">
+
+            <span>
+                CNG Bunk
+            </span>
+
+
+            <span id="bunkName">
+                -
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         ACTION BUTTONS
+    ========================== -->
+
+    <button
+        class="button primary"
+        onclick="goHome()">
+
+        BACK TO HOME
+
+    </button>
+
+
+    <button
+        class="button secondary"
+        onclick="window.print()">
+
+        SAVE / PRINT TOKEN
+
+    </button>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <div class="footer">
+
+        <strong>
+            INLIN<span>E</span>ASY
+        </strong>
+
+        &nbsp;•&nbsp;
+
+        Smart Slot Booking
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+     JS IS OUTSIDE FRONTEND
+========================== -->
+
+<script src="../js/ticket.js"></script>
+
+
+</body>
+
+</html>

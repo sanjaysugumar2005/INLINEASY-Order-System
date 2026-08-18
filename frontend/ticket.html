@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INLINEASY - Ticket</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Arial", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #ffffff;
+            color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 15px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        /* INLINEASY LOGO */
+
+        .logo {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+        }
+
+        .logo span {
+            color: #00FF42;
+        }
+
+        /* TICKET */
+
+        .ticket {
+            background: #ffffff;
+            border: 2px solid #000000;
+            border-radius: 26px;
+            padding: 28px;
+            box-shadow: 10px 10px 0 #00FF42;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+        }
+
+        .confirmed {
+            text-align: center;
+            margin-top: 8px;
+            margin-bottom: 25px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #00a82d;
+        }
+
+        /* TOKEN */
+
+        .token-box {
+            background: #000000;
+            color: #ffffff;
+            border-radius: 18px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .token-label {
+            color: #00FF42;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .token {
+            font-size: 40px;
+            font-weight: 900;
+            margin-top: 5px;
+        }
+
+        /* DETAILS */
+
+        .details {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding-bottom: 11px;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .label {
+            color: #777777;
+            font-size: 14px;
+        }
+
+        .value {
+            font-size: 14px;
+            font-weight: 800;
+            text-align: right;
+        }
+
+        /* QR */
+
+        .qr-section {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 2px dashed #000000;
+        }
+
+        .qr-section h3 {
+            font-size: 15px;
+            letter-spacing: 1px;
+        }
+
+        #qrcode {
+            display: flex;
+            justify-content: center;
+            margin: 18px 0;
+        }
+
+        .qr-note {
+            font-size: 13px;
+            color: #666666;
+        }
+
+        /* WARNING */
+
+        .warning {
+            margin-top: 22px;
+            padding: 16px;
+            border: 1.5px solid #000000;
+            border-radius: 14px;
+            background: #f8fff9;
+            font-size: 13px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .warning strong {
+            font-weight: 900;
+        }
+
+        /* DOWNLOAD */
+
+        .download-btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 17px;
+            border: 2px solid #000000;
+            border-radius: 15px;
+            background: #00FF42;
+            color: #000000;
+            font-size: 16px;
+            font-weight: 900;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 0 #000000;
+        }
+
+        @media (max-width: 520px) {
+
+            body {
+                padding: 20px 12px;
+            }
+
+            .ticket {
+                padding: 22px;
+                box-shadow: 7px 7px 0 #00FF42;
+            }
+
+            .logo {
+                font-size: 28px;
+            }
+
+            .token {
+                font-size: 34px;
+            }
+        }
+
+        /* PRINT */
+
+        @media print {
+
+            body {
+                padding: 0;
+            }
+
+            .logo {
+                margin-top: 20px;
+            }
+
+            .ticket {
+                box-shadow: none;
+            }
+
+            .download-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- LOGO -->
+
+        <div class="logo">
+            INLIN<span>E</span>ASY
+        </div>
+
+
+        <!-- TICKET -->
+
+        <div class="ticket" id="ticket">
+
+            <h1 class="title">
+                CNG BOOKING TICKET
+            </h1>
+
+            <div class="confirmed">
+                ✓ BOOKING CONFIRMED
+            </div>
+
+
+            <!-- TOKEN -->
+
+            <div class="token-box">
+
+                <div class="token-label">
+                    YOUR TOKEN
+                </div>
+
+                <div class="token" id="tokenNumber">
+                    ---
+                </div>
+
+            </div>
+
+
+            <!-- DETAILS -->
+
+            <div class="details">
+
+                <div class="row">
+                    <span class="label">Name</span>
+                    <span class="value" id="customerName">---</span>
+                </div>
+
+                <div class="row">
+                    <span class="label">Mobile</span>
+                    <span class="value" id="mobileNumber">---</span>
+                </div>
+
+                <div class="row">
+                    <span class="label">CNG Bunk</span>
+                    <span class="value" id="bunkName">---</span>
+                </div>
+
+                <div class="row">
+                    <span class="label">Car</span>
+                    <span class="value" id="carName">---</span>
+                </div>
+
+                <div class="row">
+                    <span class="label">Car Number</span>
+                    <span class="value" id="carNumber">---</span>
+                </div>
+
+                <div class="row">
+                    <span class="label">Date</span>
+                    <span class="value" id="bookingDate">---</span>
+                </div>
+
+                <div class="row">
+                    <span class="label">Time</span>
+                    <span class="value" id="bookingTime">---</span>
+                </div>
+
+            </div>
+
+
+            <!-- QR -->
+
+            <div class="qr-section">
+
+                <h3>
+                    SCAN AT CNG BUNK
+                </h3>
+
+                <div id="qrcode"></div>
+
+                <p class="qr-note">
+                    Show this QR code to the admin.
+                </p>
+
+            </div>
+
+
+            <!-- WARNING -->
+
+            <div class="warning">
+
+                ⚠️ <strong>Please download your ticket<br>
+                and keep it safe.</strong><br>
+
+                Do not share your ticket.
+
+            </div>
+
+
+            <!-- DOWNLOAD -->
+
+            <button
+                class="download-btn"
+                onclick="downloadTicket()">
+
+                ↓ DOWNLOAD TICKET
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- QR CODE LIBRARY -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <!-- OUR JS -->
+
+    <script src="../js/ticket.js"></script>
+
+</body>
+</html>

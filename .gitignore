@@ -1,0 +1,24 @@
+# Python virtual environment
+backend/venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# SQLite database
+backend/*.db
+backend/*.sqlite
+backend/*.sqlite3
+
+# Environment secrets
+.env
+backend/.env
+
+# Backup database files
+*.backup.db
+
+# Editor / OS files
+.vscode/
+.idea/
+*.swp
+.DS_Store

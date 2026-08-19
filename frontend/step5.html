@@ -655,12 +655,54 @@
 
         </div>
 
+<div class="queue" id="queueStatus">
 
-        <div class="queue">
+    <div style="
+        margin-top:20px;
+        padding:18px;
+        border-radius:16px;
+        background:#ffffff;
+        border:1px solid #dddddd;
+    ">
 
-            Keep this token ready when you arrive.
-
+        <div style="
+            font-size:12px;
+            font-weight:700;
+            letter-spacing:1px;
+            color:#666666;
+        ">
+            LIVE QUEUE
         </div>
+
+        <div style="
+            margin-top:12px;
+            font-size:15px;
+        ">
+            Current Called Token:
+            <strong id="currentCalledToken">-</strong>
+        </div>
+
+        <div style="
+            margin-top:8px;
+            font-size:15px;
+        ">
+            Customers Waiting:
+            <strong id="customersWaiting">0</strong>
+        </div>
+
+        <div style="
+            margin-top:8px;
+            font-size:15px;
+        ">
+            Your Status:
+            <strong id="customerQueueStatus">
+                BOOKED
+            </strong>
+        </div>
+
+    </div>
+
+</div>
 
     </section>
 
@@ -831,6 +873,7 @@
 <script src="../js/ticket.js"></script>
 
 
+    <script src="../js/step5.js"></script>
 </body>
 
 </html>

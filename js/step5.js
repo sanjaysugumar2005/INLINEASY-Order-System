@@ -1,7 +1,10 @@
 // ==========================================
 // INLINEASY
 // STEP 5 - BOOKING CONFIRMATION
+// BACKEND CONNECTED
 // ==========================================
+
+const API_URL = "http://127.0.0.1:5000";
 
 
 // ==========================================
@@ -22,327 +25,259 @@ document.addEventListener(
 // LOAD BOOKING DATA
 // ==========================================
 
-function loadBookingData() {
+async function loadBookingData() {
 
     // ======================================
-    // GET SAVED DATA
+    // GET REAL BACKEND TOKEN
     // ======================================
 
-    const userName =
-        localStorage.getItem(
-            "userName"
-        ) || "Not Available";
+    const token =
+        localStorage.getItem("token") ||
+        localStorage.getItem("ticketNumber");
 
+    if (!token) {
 
-    const phoneNumber =
-        localStorage.getItem(
-            "phoneNumber"
-        ) || "Not Available";
-
-
-    const carModel =
-        localStorage.getItem(
-            "carModel"
-        ) || "Not Available";
-
-
-    const carNumber =
-        localStorage.getItem(
-            "carNumber"
-        ) || "Not Available";
-
-
-    const bookingDate =
-        localStorage.getItem(
-            "bookingDate"
-        ) || "Not Available";
-
-
-    const bookingShift =
-        localStorage.getItem(
-            "bookingShift"
-        ) || "Not Available";
-
-
-    const bookingTime =
-        localStorage.getItem(
-            "bookingTime"
-        ) || "Not Available";
-
-
-    const bunkName =
-        "INLINEASY";
-
-
-    // ======================================
-    // GET TICKET NUMBER
-    // ======================================
-
-    let ticketNumber =
-        localStorage.getItem(
-            "ticketNumber"
+        console.error(
+            "No booking token found."
         );
 
-
-    // ======================================
-    // CREATE TICKET IF MISSING
-    // ======================================
-
-    if (!ticketNumber) {
-
-        ticketNumber =
-            generateTicketNumber();
-
-
-        localStorage.setItem(
-            "ticketNumber",
-            ticketNumber
+        alert(
+            "❌ Booking token not found."
         );
 
+        return;
     }
 
 
     // ======================================
-    // DISPLAY TICKET
+    // DISPLAY TOKEN
     // ======================================
 
     const tokenElement =
-        document.getElementById(
-            "tokenNumber"
-        );
-
+        document.getElementById("tokenNumber");
 
     if (tokenElement) {
 
         tokenElement.textContent =
-            ticketNumber;
+            token;
 
     }
 
 
     // ======================================
-    // DISPLAY CAR
+    // DISPLAY LOCAL BOOKING DATA
     // ======================================
+
+    const carModel =
+        localStorage.getItem("carModel") ||
+        "Not Available";
+
+    const carNumber =
+        localStorage.getItem("carNumber") ||
+        "Not Available";
+
+    const bookingDate =
+        localStorage.getItem("bookingDate") ||
+        "Not Available";
+
+    const bookingTime =
+        localStorage.getItem("bookingTime") ||
+        "Not Available";
+
+    const bunkName =
+        localStorage.getItem("bunkName") ||
+        "INLINEASY";
+
 
     const carElement =
-        document.getElementById(
-            "carName"
-        );
-
+        document.getElementById("carName");
 
     if (carElement) {
-
         carElement.textContent =
             carModel;
-
     }
 
-
-    // ======================================
-    // DISPLAY CAR NUMBER
-    // ======================================
 
     const carNumberElement =
-        document.getElementById(
-            "carNumber"
-        );
-
+        document.getElementById("carNumber");
 
     if (carNumberElement) {
-
         carNumberElement.textContent =
             carNumber;
-
     }
 
-
-    // ======================================
-    // DISPLAY DATE
-    // ======================================
 
     const dateElement =
-        document.getElementById(
-            "bookingDate"
-        );
-
+        document.getElementById("bookingDate");
 
     if (dateElement) {
-
         dateElement.textContent =
             bookingDate;
-
     }
 
-
-    // ======================================
-    // DISPLAY TIME
-    // ======================================
 
     const timeElement =
-        document.getElementById(
-            "bookingTime"
-        );
-
+        document.getElementById("bookingTime");
 
     if (timeElement) {
-
         timeElement.textContent =
             bookingTime;
-
     }
 
-
-    // ======================================
-    // DISPLAY BUNK
-    // ======================================
 
     const bunkElement =
-        document.getElementById(
-            "bunkName"
-        );
-
+        document.getElementById("bunkName");
 
     if (bunkElement) {
-
         bunkElement.textContent =
             bunkName;
-
     }
 
 
     // ======================================
-    // CREATE BOOKING OBJECT
+    // GET REAL BOOKING FROM FLASK
     // ======================================
 
-    const booking = {
+    try {
 
-        ticketNumber:
-            ticketNumber,
-
-        userName:
-            userName,
-
-        phoneNumber:
-            phoneNumber,
-
-        carModel:
-            carModel,
-
-        carNumber:
-            carNumber,
-
-        bookingDate:
-            bookingDate,
-
-        bookingShift:
-            bookingShift,
-
-        bookingTime:
-            bookingTime,
-
-        bunkName:
-            bunkName,
-
-        status:
-            "Waiting",
-
-        createdAt:
-            new Date().toISOString()
-
-    };
+        const response =
+            await fetch(
+                `${API_URL}/api/booking/${encodeURIComponent(token)}`
+            );
 
 
-    // ======================================
-    // SAVE CURRENT BOOKING
-    // ======================================
-
-    localStorage.setItem(
-        "currentBooking",
-        JSON.stringify(
-            booking
-        )
-    );
+        const data =
+            await response.json();
 
 
-    // ======================================
-    // SAVE TO ALL BOOKINGS
-    // ======================================
+        if (
+            !response.ok ||
+            !data.success
+        ) {
 
-    saveBookingToList(
-        booking
-    );
+            throw new Error(
+                data.message ||
+                "Booking not found."
+            );
 
-
-    // ======================================
-    // GENERATE QR
-    // ======================================
-
-    generateQR(
-        booking
-    );
-
-}
+        }
 
 
-// ==========================================
-// GENERATE TICKET NUMBER
-// ==========================================
-
-function generateTicketNumber() {
-
-    const randomNumber =
-        Math.floor(
-            100000 +
-            Math.random() * 900000
-        );
+        const booking =
+            data.booking;
 
 
-    return "INLINE-" +
-        randomNumber;
-
-}
-
-
-// ==========================================
-// SAVE BOOKING TO LIST
-// ==========================================
-
-function saveBookingToList(
-    booking
-) {
-
-    let bookings =
-        JSON.parse(
-            localStorage.getItem(
-                "cngBookings"
-            )
-        ) || [];
-
-
-    // Check if ticket already exists
-
-    const alreadyExists =
-        bookings.some(
-            item =>
-                item.ticketNumber ===
-                booking.ticketNumber
-        );
-
-
-    // Add only once
-
-    if (!alreadyExists) {
-
-        bookings.push(
+        console.log(
+            "INLINEASY booking:",
             booking
         );
 
+
+        // ==================================
+        // SAVE REAL BOOKING ID
+        // ==================================
 
         localStorage.setItem(
-            "cngBookings",
-            JSON.stringify(
-                bookings
-            )
+            "bookingId",
+            booking.id
+        );
+
+
+        // ==================================
+        // UPDATE LOCAL DATA FROM BACKEND
+        // ==================================
+
+        localStorage.setItem(
+            "token",
+            booking.token
+        );
+
+        localStorage.setItem(
+            "ticketNumber",
+            booking.token
+        );
+
+
+        // ==================================
+        // UPDATE DISPLAY
+        // ==================================
+
+        if (carElement) {
+
+            carElement.textContent =
+                booking.car_name;
+
+        }
+
+
+        if (carNumberElement) {
+
+            carNumberElement.textContent =
+                booking.car_number;
+
+        }
+
+
+        if (dateElement) {
+
+            dateElement.textContent =
+                booking.booking_date;
+
+        }
+
+
+        if (timeElement) {
+
+            timeElement.textContent =
+                booking.booking_time;
+
+        }
+
+
+        if (bunkElement) {
+
+            bunkElement.textContent =
+                booking.bunk;
+
+        }
+
+
+        // ==================================
+        // GENERATE REAL QR
+        // ==================================
+
+        generateQR(
+            booking
+        );
+
+
+        // ==================================
+        // SAVE CURRENT BOOKING
+        // ==================================
+
+        localStorage.setItem(
+            "currentBooking",
+            JSON.stringify(booking)
+        );
+
+
+        console.log(
+            "Booking loaded successfully:",
+            booking.token
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Step 5 booking error:",
+            error
+        );
+
+
+        alert(
+            "❌ Cannot connect to INLINEASY server.\n\n" +
+            "Make sure Flask is running on port 5000."
         );
 
     }
@@ -375,13 +310,9 @@ function generateQR(
     }
 
 
-    // Clear previous QR
-
     qrContainer.innerHTML =
         "";
 
-
-    // Check QR library
 
     if (
         typeof QRCode ===
@@ -391,7 +322,7 @@ function generateQR(
         qrContainer.innerHTML = `
 
             <p style="
-                color:#000000;
+                color:#000;
                 font-size:13px;
                 text-align:center;
                 padding:20px;
@@ -413,48 +344,41 @@ function generateQR(
 
 
     // ======================================
-    // QR DATA
+    // QR CONTAINS REAL TOKEN
     // ======================================
 
     const qrData =
         JSON.stringify({
 
-            ticketNumber:
-                booking.ticketNumber,
+            token:
+                booking.token,
 
-            userName:
-                booking.userName,
+            bookingId:
+                booking.id,
 
-            phoneNumber:
-                booking.phoneNumber,
+            name:
+                booking.name,
 
-            carModel:
-                booking.carModel,
+            mobile:
+                booking.mobile,
+
+            car:
+                booking.car_name,
 
             carNumber:
-                booking.carNumber,
+                booking.car_number,
 
-            bookingDate:
-                booking.bookingDate,
+            date:
+                booking.booking_date,
 
-            bookingShift:
-                booking.bookingShift,
+            time:
+                booking.booking_time,
 
-            bookingTime:
-                booking.bookingTime,
-
-            bunkName:
-                booking.bunkName,
-
-            status:
-                booking.status
+            bunk:
+                booking.bunk
 
         });
 
-
-    // ======================================
-    // CREATE QR
-    // ======================================
 
     new QRCode(
         qrContainer,
@@ -494,3 +418,161 @@ function goHome() {
         "index.html";
 
 }
+// ==========================================
+// STEP 9.2 - LIVE QUEUE
+// ==========================================
+
+async function loadLiveQueue() {
+
+    const token =
+        localStorage.getItem("token") ||
+        localStorage.getItem("ticketNumber");
+
+    if (!token) {
+        return;
+    }
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_URL}/api/queue`
+            );
+
+        const data =
+            await response.json();
+
+        if (
+            !response.ok ||
+            !data.success
+        ) {
+
+            throw new Error(
+                data.message ||
+                "Queue loading failed"
+            );
+
+        }
+
+
+        // ==================================
+        // CURRENT CALLED TOKEN
+        // ==================================
+
+        const calledTokenElement =
+            document.getElementById(
+                "currentCalledToken"
+            );
+
+        if (calledTokenElement) {
+
+            if (
+                data.called &&
+                data.called.length > 0
+            ) {
+
+                const latestCalled =
+                    data.called[
+                        data.called.length - 1
+                    ];
+
+                calledTokenElement.textContent =
+                    latestCalled.token;
+
+            } else {
+
+                calledTokenElement.textContent =
+                    "NONE";
+
+            }
+
+        }
+
+
+        // ==================================
+        // WAITING COUNT
+        // ==================================
+
+        const waitingElement =
+            document.getElementById(
+                "customersWaiting"
+            );
+
+        if (waitingElement) {
+
+            waitingElement.textContent =
+                data.waiting
+                    ? data.waiting.length
+                    : 0;
+
+        }
+
+
+        // ==================================
+        // FIND MY BOOKING
+        // ==================================
+
+        const allBookings =
+            data.bookings || [];
+
+
+        const myBooking =
+            allBookings.find(
+                booking =>
+                    booking.token === token
+            );
+
+
+        const statusElement =
+            document.getElementById(
+                "customerQueueStatus"
+            );
+
+
+        if (
+            statusElement &&
+            myBooking
+        ) {
+
+            statusElement.textContent =
+                myBooking.status;
+
+        }
+
+
+        console.log(
+            "INLINEASY live queue:",
+            data
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Live queue error:",
+            error
+        );
+
+    }
+
+}
+
+
+// ==========================================
+// START LIVE QUEUE
+// ==========================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        loadLiveQueue();
+
+
+        setInterval(
+            loadLiveQueue,
+            5000
+        );
+
+    }
+);

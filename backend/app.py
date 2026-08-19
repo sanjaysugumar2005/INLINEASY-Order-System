@@ -447,7 +447,11 @@ def get_bookings(mobile):
 
             bookings.token,
 
-            bookings.status
+            bookings.status,
+
+            bookings.payment_method,
+
+            bookings.payment_status
 
         FROM users
 
@@ -689,7 +693,6 @@ def get_booking_by_token(token):
 
     cursor = conn.cursor()
 
-
     cursor.execute(
         """
         SELECT
@@ -712,7 +715,11 @@ def get_booking_by_token(token):
 
             bookings.token,
 
-            bookings.status
+            bookings.status,
+
+            bookings.payment_method,
+
+            bookings.payment_status
 
         FROM bookings
 
@@ -726,11 +733,9 @@ def get_booking_by_token(token):
         (token,)
     )
 
-
     booking = cursor.fetchone()
 
     conn.close()
-
 
     if not booking:
 
@@ -743,7 +748,6 @@ def get_booking_by_token(token):
 
         }), 404
 
-
     return jsonify({
 
         "success":
@@ -753,7 +757,6 @@ def get_booking_by_token(token):
             dict(booking)
 
     })
-
 
 # ==========================================
 # SERVER START
@@ -823,8 +826,10 @@ def update_payment(booking_id):
         "booking_id": booking_id,
         "payment_method": payment_method,
         "payment_status": "PAID",
-        "message": "Payment updated successfully"
+        "message": "Payment completed successfully"
     }), 200
+
+
 # ==========================================
 # STEP 8.1 - QUEUE API
 # ==========================================
@@ -876,23 +881,32 @@ def get_queue():
     no_show = [
         booking
         for booking in bookings
-        if booking["status"] == "NO_SHOW"
+        if booking["status"] == "NO-SHOW"
     ]
+
+    current_token = None
+
+    if called:
+        current_token = called[-1]["token"]
 
     return jsonify({
         "success": True,
         "total": len(bookings),
+        "current_token": current_token,
         "bookings": bookings,
         "waiting": waiting,
         "called": called,
         "completed": completed,
         "no_show": no_show
     }), 200
+
+
 # ==========================================
 # START FLASK SERVER
 # ==========================================
 
 if __name__ == "__main__":
+
     app.run(
         host="127.0.0.1",
         port=5000,

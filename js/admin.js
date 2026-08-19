@@ -279,9 +279,29 @@ function displayBookings() {
                         ${booking.status || "BOOKED"}
                     </span>
                 </td>
+<td>
+    <button
+        onclick="completeBooking(${booking.id})"
+        ${booking.status === "COMPLETED" ? "disabled" : ""}
+    >
+        COMPLETE
+    </button>
 
+    <button
+        onclick="markNoShow(${booking.id})"
+        ${booking.status === "COMPLETED" ? "disabled" : ""}
+    >
+        NO-SHOW
+    </button>
 
+    <button
+        onclick="viewBooking(${booking.id})"
+    >
+        VIEW
+    </button>
+</td>
             `;
+
 
 
             tableBody.appendChild(row);

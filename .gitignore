@@ -22,3 +22,11 @@ backend/.env
 .idea/
 *.swp
 .DS_Store
+
+# Backup HTML files
+frontend/*.backup.html
+frontend/*.before-css-cleanup.html
+frontend/*.working.html
+
+# All backup files
+frontend/*backup*.html

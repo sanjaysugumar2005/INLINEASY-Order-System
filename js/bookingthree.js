@@ -580,7 +580,7 @@ async function confirmBooking() {
     if (!selectedSlot) {
 
         showError(
-            "Please select an available 15-minute slot."
+            "Please select an available 10-minute slot."
         );
 
         return;
@@ -994,4 +994,23 @@ async function confirmBooking() {
 
     }
 
+}
+// ======================================
+// SHOW ERROR MESSAGE
+// ======================================
+
+function showError(message) {
+
+    const errorMessage =
+        document.getElementById("errorMessage");
+
+    if (!errorMessage) {
+        return;
+    }
+
+    errorMessage.textContent =
+        message;
+
+    errorMessage.style.display =
+        "block";
 }

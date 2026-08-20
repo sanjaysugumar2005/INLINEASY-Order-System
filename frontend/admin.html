@@ -7,20 +7,12 @@
 
     <title>INLINEASY | Admin Dashboard</title>
 
-    <style>
 
 <style>
 
 /* =========================================================
-   INLINEASY — PREMIUM DARK ADMIN UI
+   INLINEASY — PREMIUM ADMIN CONTROL CENTER
    BLACK / WHITE / NEON GREEN
-========================================================= */
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-
-
-/* =========================================================
-   RESET
 ========================================================= */
 
 * {
@@ -34,12 +26,12 @@ html {
 }
 
 body {
-    font-family: "Inter", Arial, sans-serif;
-    background: #000000;
+    font-family: "Posterama1919", Inter, Arial, sans-serif;
+    background: #050505;
     color: #FFFFFF;
     min-height: 100vh;
+    padding: 24px 0 60px;
 }
-
 
 /* =========================================================
    SCROLLBAR
@@ -51,7 +43,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: #000000;
+    background: #050505;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -63,58 +55,90 @@ body {
     background: #00FF42;
 }
 
-
 /* =========================================================
-   MAIN CONTAINER
+   MAIN
 ========================================================= */
 
 .container {
     width: 94%;
-    max-width: 1500px;
+    max-width: 1450px;
     margin: auto;
-    padding: 25px 0 60px;
 }
-
 
 /* =========================================================
    HEADER
 ========================================================= */
 
 header {
+    position: relative;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    padding: 18px 22px;
+    padding: 22px 25px;
 
-    background: #080808;
+    background: #0B0B0B;
 
-    border: 1px solid #FFFFFF;
-    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.10);
+
+    border-radius: 22px;
 
     margin-bottom: 30px;
 
+    overflow: hidden;
+
     box-shadow:
-        0 10px 40px rgba(0, 0, 0, 0.6);
+        0 20px 60px rgba(0,0,0,0.55);
+}
+
+header::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 8%;
+
+    width: 84%;
+    height: 2px;
+
+    background: #00FF42;
+
+    box-shadow:
+        0 0 15px rgba(0,255,66,0.8),
+        0 0 35px rgba(0,255,66,0.2);
+}
+
+.header-left {
+    position: relative;
+    z-index: 2;
 }
 
 .logo {
-    font-size: 27px;
-    font-weight: 900;
-    letter-spacing: 1px;
     color: #FFFFFF;
+
+    font-size: 28px;
+
+    font-weight: 900;
+
+    letter-spacing: 1.5px;
 }
 
 .logo span {
     color: #00FF42;
+
+    text-shadow:
+        0 0 14px rgba(0,255,66,0.7);
 }
 
 .header-left p {
-    color: #A8A8A8;
-    font-size: 12px;
-    margin-top: 6px;
-}
+    color: #777777;
 
+    font-size: 11px;
+
+    margin-top: 7px;
+}
 
 /* =========================================================
    ADMIN PROFILE
@@ -122,75 +146,87 @@ header {
 
 .admin-profile {
     display: flex;
+
     align-items: center;
+
     gap: 10px;
 
-    padding: 7px 13px 7px 7px;
+    padding: 7px 14px 7px 7px;
 
-    background: #000000;
+    background: #050505;
 
-    border: 1px solid #FFFFFF;
-    border-radius: 40px;
+    border: 1px solid rgba(255,255,255,0.12);
 
-    transition: all .25s ease;
+    border-radius: 50px;
+
+    transition: 0.25s ease;
 }
 
 .admin-profile:hover {
     border-color: #00FF42;
 
     box-shadow:
-        0 0 20px rgba(0,255,66,.25);
+        0 0 25px rgba(0,255,66,0.12);
 }
 
 .avatar {
-    width: 35px;
-    height: 35px;
+    width: 38px;
+    height: 38px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    background: #00FF42;
-    color: #000000;
-
     border-radius: 50%;
 
-    font-size: 13px;
+    background: #00FF42;
+
+    color: #000000;
+
+    font-size: 14px;
+
     font-weight: 900;
+
+    box-shadow:
+        0 0 18px rgba(0,255,66,0.18);
 }
 
 .admin-profile span {
     color: #FFFFFF;
-    font-size: 12px;
-    font-weight: 600;
-}
 
+    font-size: 11px;
+
+    font-weight: 700;
+}
 
 /* =========================================================
    PAGE TITLE
 ========================================================= */
 
 .page-title {
-    margin-bottom: 25px;
+    margin-bottom: 24px;
 }
 
 .page-title h1 {
     color: #FFFFFF;
 
     font-size: 38px;
-    font-weight: 800;
+
+    line-height: 1.1;
+
+    font-weight: 900;
 
     letter-spacing: -1px;
 }
 
 .page-title p {
-    color: #A8A8A8;
+    color: #777777;
 
-    font-size: 13px;
+    font-size: 12px;
 
-    margin-top: 7px;
+    margin-top: 8px;
 }
-
 
 /* =========================================================
    STATISTICS
@@ -202,9 +238,9 @@ header {
     grid-template-columns:
         repeat(4, minmax(0, 1fr));
 
-    gap: 18px;
+    gap: 15px;
 
-    margin-bottom: 25px;
+    margin-bottom: 22px;
 }
 
 .stat-card {
@@ -212,17 +248,34 @@ header {
 
     padding: 23px;
 
-    background: #080808;
+    background: #0B0B0B;
 
-    border: 1px solid #FFFFFF;
-    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.10);
+
+    border-radius: 18px;
 
     overflow: hidden;
 
     transition:
-        transform .25s ease,
-        border-color .25s ease,
-        box-shadow .25s ease;
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.stat-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 3px;
+    height: 100%;
+
+    background: #00FF42;
+
+    opacity: 0.45;
 }
 
 .stat-card::after {
@@ -230,72 +283,86 @@ header {
 
     position: absolute;
 
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
 
-    right: -35px;
-    bottom: -35px;
+    right: -45px;
+    bottom: -50px;
 
     background: #00FF42;
 
-    opacity: 0;
+    opacity: 0.03;
 
-    filter: blur(40px);
+    filter: blur(35px);
 
-    transition: .25s ease;
+    transition: 0.3s ease;
 }
 
 .stat-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
 
-    border-color: #00FF42;
+    border-color:
+        rgba(0,255,66,0.45);
 
     box-shadow:
-        0 15px 35px rgba(0,0,0,.7),
-        0 0 25px rgba(0,255,66,.15);
+        0 15px 40px rgba(0,0,0,0.45),
+        0 0 25px rgba(0,255,66,0.07);
 }
 
 .stat-card:hover::after {
-    opacity: .25;
+    opacity: 0.16;
 }
 
-.stat-label {
-    color: #A8A8A8;
+.stat-card h3 {
+    color: #777777;
 
-    font-size: 11px;
-    font-weight: 600;
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
 
     text-transform: uppercase;
 
-    letter-spacing: 1px;
+    margin-bottom: 12px;
 }
 
 .stat-number {
-    margin-top: 10px;
-
     color: #FFFFFF;
 
     font-size: 38px;
+
+    line-height: 1;
+
     font-weight: 900;
-
-    letter-spacing: -1px;
 }
 
-.stat-number.green {
-    color: #00FF42;
+.stat-card small {
+    display: block;
 
-    text-shadow:
-        0 0 15px rgba(0,255,66,.25);
-}
-
-.stat-description {
     color: #666666;
 
-    font-size: 11px;
+    font-size: 10px;
 
-    margin-top: 6px;
+    margin-top: 9px;
 }
 
+/* =========================================================
+   GENERAL CARD
+========================================================= */
+
+.station-bar,
+.quick-actions,
+.booking-section {
+    background: #0B0B0B;
+
+    border: 1px solid rgba(255,255,255,0.10);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,0.35);
+}
 
 /* =========================================================
    STATION BAR
@@ -305,115 +372,139 @@ header {
     display: flex;
 
     justify-content: space-between;
+
     align-items: center;
 
-    padding: 20px 23px;
+    gap: 20px;
 
-    background: #080808;
+    padding: 20px 22px;
 
-    border: 1px solid #FFFFFF;
-    border-radius: 20px;
-
-    margin-bottom: 25px;
-
-    transition: .25s ease;
+    margin-bottom: 22px;
 }
 
-.station-bar:hover {
-    border-color: #00FF42;
+.station-info h2 {
+    color: #FFFFFF;
 
-    box-shadow:
-        0 0 25px rgba(0,255,66,.12);
+    font-size: 17px;
+
+    font-weight: 900;
 }
 
-.station-left {
+.station-info p {
+    color: #777777;
+
+    font-size: 10px;
+
+    margin-top: 5px;
+}
+
+/* =========================================================
+   STATION STATUS
+========================================================= */
+
+.station-status {
     display: flex;
 
     align-items: center;
 
-    gap: 13px;
+    gap: 10px;
 }
 
+.station-status span {
+    color: #777777;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    background: #00FF42;
+
+    box-shadow:
+        0 0 12px rgba(0,255,66,0.8);
+}
 
 /* =========================================================
    BUTTONS
 ========================================================= */
 
 button {
-    appearance: none;
+    border: 1px solid #00FF42;
 
-    border: 1px solid #FFFFFF;
+    border-radius: 11px;
 
-    background: #000000;
+    padding: 11px 17px;
 
-    color: #FFFFFF;
-
-    border-radius: 12px;
-
-    padding: 11px 18px;
-
-    font-size: 12px;
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition:
-        background .2s ease,
-        color .2s ease,
-        border-color .2s ease,
-        transform .2s ease,
-        box-shadow .2s ease;
-}
-
-button:hover {
     background: #00FF42;
 
     color: #000000;
 
-    border-color: #00FF42;
+    font-family: inherit;
 
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.5px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+button:hover {
     transform: translateY(-2px);
 
     box-shadow:
-        0 8px 20px rgba(0,255,66,.18);
+        0 8px 25px rgba(0,255,66,0.18);
 }
 
 button:active {
     transform: translateY(0);
 }
 
+button:disabled {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+}
 
 /* =========================================================
-   GENERIC CARDS
+   EMERGENCY BUTTON
 ========================================================= */
 
-.card,
-.quick-action,
-.payment-card,
-.booking-section {
-    background: #080808;
+button[onclick="emergencyMode()"] {
+    background: #FF3030;
 
-    border: 1px solid #FFFFFF;
+    border-color: #FF3030;
 
-    border-radius: 20px;
-
-    transition:
-        border-color .25s ease,
-        box-shadow .25s ease,
-        transform .25s ease;
-}
-
-.card:hover,
-.quick-action:hover,
-.payment-card:hover,
-.booking-section:hover {
-    border-color: #00FF42;
+    color: #FFFFFF;
 
     box-shadow:
-        0 15px 35px rgba(0,0,0,.65),
-        0 0 25px rgba(0,255,66,.12);
+        0 0 0 rgba(255,48,48,0);
 }
 
+button[onclick="emergencyMode()"]:hover {
+    background: #FF2020;
+
+    border-color: #FF2020;
+
+    color: #FFFFFF;
+
+    box-shadow:
+        0 8px 25px rgba(255,48,48,0.22),
+        0 0 20px rgba(255,48,48,0.10);
+}
 
 /* =========================================================
    QUICK ACTIONS
@@ -423,98 +514,79 @@ button:active {
     display: grid;
 
     grid-template-columns:
-        repeat(3, minmax(0, 1fr));
+        repeat(4, 1fr);
 
-    gap: 18px;
+    gap: 12px;
 
-    margin-bottom: 25px;
+    padding: 18px;
+
+    margin-bottom: 22px;
 }
 
 .quick-action {
     position: relative;
 
-    padding: 23px;
+    padding: 19px;
+
+    min-height: 105px;
+
+    background: #050505;
+
+    border: 1px solid rgba(255,255,255,0.10);
+
+    border-radius: 15px;
 
     cursor: pointer;
 
-    overflow: hidden;
+    transition: 0.25s ease;
 }
 
-.quick-action::before {
-    content: "";
+.quick-action:hover {
+    transform: translateY(-3px);
 
-    position: absolute;
+    border-color: #00FF42;
 
-    left: 0;
-    top: 0;
-
-    width: 3px;
-    height: 0;
-
-    background: #00FF42;
-
-    transition: height .25s ease;
-}
-
-.quick-action:hover::before {
-    height: 100%;
+    box-shadow:
+        0 12px 30px rgba(0,0,0,0.45),
+        0 0 20px rgba(0,255,66,0.08);
 }
 
 .quick-action h3 {
     color: #FFFFFF;
 
-    font-size: 15px;
-    font-weight: 700;
-}
-
-.quick-action p {
-    color: #A8A8A8;
-
-    font-size: 11px;
-
-    margin-top: 7px;
-}
-
-.quick-action:hover h3 {
-    color: #00FF42;
-}
-
-
-/* =========================================================
-   PAYMENT
-========================================================= */
-
-.payment-card {
-    padding: 24px;
-
-    margin-bottom: 25px;
-}
-
-.payment-card h3 {
-    color: #FFFFFF;
-
-    font-size: 16px;
-}
-
-.payment-card .balance {
-    color: #00FF42;
-
-    font-size: 34px;
+    font-size: 12px;
 
     font-weight: 900;
 
-    margin: 12px 0 18px;
+    margin-bottom: 7px;
 }
 
+.quick-action p {
+    color: #666666;
+
+    font-size: 9px;
+
+    line-height: 1.5;
+}
+
+.quick-action-icon {
+    color: #00FF42;
+
+    font-size: 18px;
+
+    margin-bottom: 10px;
+}
 
 /* =========================================================
    BOOKING SECTION
 ========================================================= */
 
 .booking-section {
-    padding: 24px;
+    padding: 23px;
 
-    overflow-x: auto;
+    margin-bottom: 22px;
+
+    overflow: hidden;
 }
 
 .booking-section h2 {
@@ -522,9 +594,24 @@ button:active {
 
     font-size: 19px;
 
+    font-weight: 900;
+
     margin-bottom: 20px;
 }
 
+/* =========================================================
+   TABLE WRAPPER
+========================================================= */
+
+.booking-table {
+    width: 100%;
+
+    overflow-x: auto;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    border-radius: 14px;
+}
 
 /* =========================================================
    TABLE
@@ -539,51 +626,59 @@ table {
 }
 
 thead {
-    background: #101010;
+    background: #111111;
 }
 
 thead th {
-    color: #A8A8A8;
+    color: #777777;
 
     text-align: left;
 
-    padding: 14px 12px;
+    padding: 14px 13px;
 
-    font-size: 10px;
-    font-weight: 700;
+    font-size: 9px;
 
-    letter-spacing: .9px;
+    font-weight: 900;
 
-    border-bottom: 1px solid #FFFFFF;
-}
+    letter-spacing: 1px;
 
-tbody tr {
-    transition: .2s ease;
+    text-transform: uppercase;
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.10);
 }
 
 tbody td {
-    color: #FFFFFF;
+    color: #D8D8D8;
 
-    padding: 16px 12px;
+    padding: 15px 13px;
 
-    font-size: 11px;
+    font-size: 10px;
 
-    border-bottom: 1px solid #303030;
+    border-bottom:
+        1px solid rgba(255,255,255,0.06);
+
+    transition: 0.2s ease;
+}
+
+tbody tr {
+    transition: 0.2s ease;
 }
 
 tbody tr:hover {
-    background: #00FF42;
-
-    transform: scale(1.002);
+    background: rgba(0,255,66,0.05);
 }
 
 tbody tr:hover td {
-    color: #000000;
+    color: #FFFFFF;
 }
 
+tbody tr:last-child td {
+    border-bottom: none;
+}
 
 /* =========================================================
-   STATUS
+   STATUS BADGE
 ========================================================= */
 
 .status {
@@ -591,27 +686,26 @@ tbody tr:hover td {
 
     align-items: center;
 
-    padding: 5px 10px;
+    justify-content: center;
 
-    border: 1px solid #FFFFFF;
+    min-width: 75px;
+
+    padding: 6px 11px;
+
+    border: 1px solid rgba(0,255,66,0.45);
 
     border-radius: 30px;
 
-    color: #FFFFFF;
+    background: rgba(0,255,66,0.06);
 
-    font-size: 9px;
+    color: #00FF42;
 
-    font-weight: 800;
+    font-size: 8px;
 
-    letter-spacing: .4px;
+    font-weight: 900;
+
+    letter-spacing: 0.6px;
 }
-
-tbody tr:hover .status {
-    border-color: #000000;
-
-    color: #000000;
-}
-
 
 /* =========================================================
    INPUTS
@@ -621,19 +715,31 @@ input,
 select {
     width: 100%;
 
-    padding: 12px 14px;
+    height: 45px;
 
-    background: #000000;
+    padding: 10px 13px;
+
+    background: #050505;
 
     color: #FFFFFF;
 
-    border: 1px solid #FFFFFF;
+    border: 1px solid rgba(255,255,255,0.12);
 
-    border-radius: 12px;
+    border-radius: 10px;
 
     outline: none;
 
-    transition: .2s ease;
+    font-family: inherit;
+
+    font-size: 11px;
+
+    transition: 0.2s ease;
+}
+
+input:hover,
+select:hover {
+    border-color:
+        rgba(255,255,255,0.22);
 }
 
 input:focus,
@@ -641,13 +747,13 @@ select:focus {
     border-color: #00FF42;
 
     box-shadow:
-        0 0 15px rgba(0,255,66,.12);
+        0 0 0 3px rgba(0,255,66,0.08),
+        0 0 18px rgba(0,255,66,0.06);
 }
 
 input::placeholder {
-    color: #666666;
+    color: #555555;
 }
-
 
 /* =========================================================
    LINKS
@@ -658,13 +764,20 @@ a {
 
     text-decoration: none;
 
-    transition: .2s ease;
+    transition: 0.2s ease;
 }
 
 a:hover {
     color: #00FF42;
 }
 
+/* =========================================================
+   GREEN ACCENT TEXT
+========================================================= */
+
+.green {
+    color: #00FF42;
+}
 
 /* =========================================================
    MOBILE
@@ -673,27 +786,32 @@ a:hover {
 @media (max-width: 1100px) {
 
     .stats {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
     .quick-actions {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 }
 
-
 @media (max-width: 700px) {
 
-    .container {
-        width: 92%;
-
+    body {
         padding-top: 15px;
     }
 
-    header {
-        padding: 15px;
+    .container {
+        width: 92%;
+    }
 
-        border-radius: 16px;
+    header {
+        padding: 17px;
+
+        border-radius: 17px;
+
+        align-items: flex-start;
     }
 
     .logo {
@@ -701,52 +819,72 @@ a:hover {
     }
 
     .header-left p {
-        font-size: 10px;
+        font-size: 9px;
+    }
+
+    .admin-profile {
+        padding: 5px;
     }
 
     .admin-profile span {
         display: none;
     }
 
+    .avatar {
+        width: 34px;
+        height: 34px;
+    }
+
     .page-title h1 {
-        font-size: 30px;
+        font-size: 29px;
     }
 
     .stats {
         grid-template-columns: 1fr;
 
-        gap: 12px;
+        gap: 10px;
     }
 
     .stat-card {
         padding: 20px;
     }
 
-    .quick-actions {
-        grid-template-columns: 1fr;
-
-        gap: 12px;
+    .stat-number {
+        font-size: 34px;
     }
 
     .station-bar {
         flex-direction: column;
 
         align-items: flex-start;
+    }
 
-        gap: 15px;
+    .station-status {
+        width: 100%;
+
+        justify-content: space-between;
+    }
+
+    .quick-actions {
+        grid-template-columns: 1fr;
+
+        padding: 13px;
     }
 
     .booking-section {
-        padding: 17px;
+        padding: 16px;
 
-        border-radius: 16px;
+        border-radius: 17px;
     }
 
-    table {
-        min-width: 850px;
+    .booking-section h2 {
+        font-size: 17px;
+    }
+
+    .booking-table {
+        border-radius: 11px;
     }
 }
-
 
 @media (max-width: 420px) {
 
@@ -755,24 +893,46 @@ a:hover {
     }
 
     .page-title h1 {
-        font-size: 26px;
+        font-size: 25px;
     }
 
     .stat-number {
-        font-size: 32px;
+        font-size: 31px;
     }
 
     .quick-action {
-        padding: 19px;
+        padding: 17px;
     }
 
     button {
-        padding: 10px 14px;
+        padding: 10px 13px;
+    }
+}
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print {
+
+    body {
+        background: #FFFFFF;
+        color: #000000;
+    }
+
+    header,
+    .quick-actions,
+    button {
+        display: none;
+    }
+
+    .container {
+        width: 100%;
+        max-width: none;
     }
 }
 
 </style>
-
 
 
 </head>

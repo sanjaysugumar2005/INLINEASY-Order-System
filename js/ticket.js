@@ -260,12 +260,121 @@ if (
 // ==========================================
 // DOWNLOAD / PRINT TICKET
 // ==========================================
+// ==========================================
+// DOWNLOAD EXACT PREMIUM INLINEASY TICKET
+// ONE PAGE - SAME DESIGN
+// ==========================================
 
-function downloadTicket() {
+async function downloadTicket() {
 
-    window.print();
+    const ticket = document.getElementById("ticket");
+
+    if (!ticket) {
+        alert("Ticket not found.");
+        return;
+    }
+
+    if (
+        typeof html2canvas === "undefined" ||
+        typeof window.jspdf === "undefined"
+    ) {
+        alert("PDF service is not available. Please check your internet connection.");
+        return;
+    }
+
+    const downloadButton =
+        document.querySelector(".download-btn");
+
+    if (downloadButton) {
+        downloadButton.style.display = "none";
+    }
+
+    try {
+
+        const canvas = await html2canvas(ticket, {
+            scale: 2,
+            useCORS: true,
+            allowTaint: false,
+            backgroundColor: "#0b0b0b",
+            logging: false
+        });
+
+        const imageData =
+            canvas.toDataURL("image/png", 1.0);
+
+        const { jsPDF } = window.jspdf;
+
+        /*
+         * Create PDF page using the ticket's
+         * exact aspect ratio.
+         */
+
+        const ticketWidth = canvas.width;
+        const ticketHeight = canvas.height;
+
+        const pdfWidth = 100;
+        const pdfHeight =
+            (ticketHeight / ticketWidth) * pdfWidth;
+
+        const pdf = new jsPDF({
+            orientation:
+                pdfHeight > pdfWidth
+                    ? "portrait"
+                    : "landscape",
+
+            unit: "mm",
+
+            format: [
+                pdfWidth,
+                pdfHeight
+            ]
+        });
+
+        pdf.addImage(
+            imageData,
+            "PNG",
+            0,
+            0,
+            pdfWidth,
+            pdfHeight
+        );
+
+        const token =
+            tokenNumber &&
+            tokenNumber !== "TOKEN ERROR"
+                ? tokenNumber
+                : "Booking";
+
+        pdf.save(
+            `INLINEASY-Ticket-${token}.pdf`
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "INLINEASY PDF Error:",
+            error
+        );
+
+        alert(
+            "Unable to download ticket. Please try again."
+        );
+
+    }
+
+    finally {
+
+        if (downloadButton) {
+            downloadButton.style.display = "";
+
+        }
+
+    }
 
 }
+
 // ==========================================
 // LIVE BOOKING STATUS
 // ==========================================

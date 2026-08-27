@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INLINEASY — Cart</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+
+        :root {
+            --neon: #00FF42;
+            --green: #00C853;
+            --black: #080808;
+            --surface: #111111;
+            --surface2: #161616;
+            --white: #FFFFFF;
+            --gray: #A8A8A8;
+            --border: #303030;
+            --radius: 24px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            padding-bottom: 40px;
+
+            background:
+                radial-gradient(
+                    circle at 85% 0%,
+                    rgba(0,255,66,0.07),
+                    transparent 30%
+                ),
+                var(--black);
+
+            color: var(--white);
+            font-family: "Manrope", sans-serif;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .app {
+            width: 100%;
+            max-width: 1100px;
+            margin: auto;
+            padding: 25px 5%;
+        }
+
+        /* HEADER */
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 55px;
+        }
+
+        .back-btn {
+            width: 44px;
+            height: 44px;
+
+            border: 1px solid var(--border);
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.03);
+            color: white;
+
+            font-size: 18px;
+        }
+
+        .back-btn:hover {
+            color: var(--neon);
+            border-color: var(--neon);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+        }
+
+        .logo span {
+            color: var(--neon);
+        }
+
+        .step {
+            color: var(--gray);
+            font-size: 10px;
+            letter-spacing: 1.5px;
+        }
+
+        /* INTRO */
+
+        .intro {
+            margin-bottom: 35px;
+        }
+
+        .eyebrow {
+            color: var(--neon);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .intro h1 {
+            font-size: clamp(38px, 6vw, 58px);
+            line-height: 1;
+            letter-spacing: -3px;
+        }
+
+        .intro p {
+            margin-top: 12px;
+            color: var(--gray);
+            font-size: 13px;
+        }
+
+        /* LAYOUT */
+
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 1.4fr 0.8fr;
+            gap: 22px;
+            align-items: start;
+        }
+
+        /* ITEMS */
+
+        .items-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 95px 1fr auto;
+
+            gap: 18px;
+            align-items: center;
+
+            padding: 14px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.045),
+                    rgba(255,255,255,0.012)
+                );
+
+            transition: 0.25s ease;
+        }
+
+        .cart-item:hover {
+            border-color: rgba(0,255,66,0.25);
+        }
+
+        .food-image {
+            width: 95px;
+            height: 95px;
+
+            border-radius: 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #303030,
+                    #121212
+                );
+
+            font-size: 42px;
+        }
+
+        .item-info h2 {
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+
+        .item-info p {
+            color: var(--gray);
+            font-size: 10px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .item-price {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .quantity {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .qty-btn {
+            width: 31px;
+            height: 31px;
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            background: #151515;
+            color: white;
+
+            font-size: 15px;
+        }
+
+        .qty-btn:hover {
+            border-color: var(--neon);
+            color: var(--neon);
+        }
+
+        .qty-number {
+            width: 20px;
+            text-align: center;
+
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .remove-btn {
+            display: block;
+
+            margin-top: 9px;
+
+            border: none;
+            background: transparent;
+
+            color: #777;
+
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .remove-btn:hover {
+            color: #ff5c5c;
+        }
+
+        /* SUMMARY */
+
+        .summary {
+            position: sticky;
+            top: 25px;
+
+            padding: 25px;
+
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.055),
+                    rgba(255,255,255,0.015)
+                );
+
+            backdrop-filter: blur(18px);
+        }
+
+        .summary-label {
+            color: var(--gray);
+            font-size: 10px;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .summary h2 {
+            font-size: 24px;
+            margin-bottom: 25px;
+        }
+
+        .line {
+            height: 1px;
+            background: var(--border);
+            margin: 17px 0;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 13px;
+
+            font-size: 12px;
+        }
+
+        .summary-row span:first-child {
+            color: var(--gray);
+        }
+
+        .summary-row span:last-child {
+            font-family: "JetBrains Mono", monospace;
+        }
+
+        .total-row {
+            margin-top: 20px;
+        }
+
+        .total-row span:first-child {
+            color: white;
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .total-row span:last-child {
+            color: var(--neon);
+            font-size: 19px;
+            font-weight: 700;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            height: 54px;
+
+            margin-top: 22px;
+
+            border: none;
+            border-radius: 14px;
+
+            background: var(--neon);
+            color: #000;
+
+            font-size: 11px;
+            font-weight: 800;
+
+            transition: 0.25s ease;
+        }
+
+        .checkout-btn:hover {
+            background: var(--green);
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 14px 35px rgba(0,255,66,0.18);
+        }
+
+        .continue-btn {
+            width: 100%;
+            height: 45px;
+
+            margin-top: 9px;
+
+            border: 1px solid var(--border);
+            border-radius: 13px;
+
+            background: transparent;
+            color: var(--gray);
+
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .continue-btn:hover {
+            color: white;
+            border-color: #555;
+        }
+
+        /* EMPTY */
+
+        .empty {
+            display: none;
+
+            text-align: center;
+
+            padding: 75px 20px;
+
+            border: 1px dashed var(--border);
+            border-radius: var(--radius);
+        }
+
+        .empty-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .empty h2 {
+            font-size: 21px;
+            margin-bottom: 8px;
+        }
+
+        .empty p {
+            color: var(--gray);
+            font-size: 11px;
+            margin-bottom: 22px;
+        }
+
+        .menu-btn {
+            height: 46px;
+            padding: 0 22px;
+
+            border: 1px solid var(--neon);
+            border-radius: 12px;
+
+            background: transparent;
+            color: var(--neon);
+
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .menu-btn:hover {
+            background: var(--neon);
+            color: #000;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 800px) {
+
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .summary {
+                position: static;
+            }
+        }
+
+        @media (max-width: 560px) {
+
+            .app {
+                padding: 20px;
+            }
+
+            .topbar {
+                margin-bottom: 40px;
+            }
+
+            .cart-item {
+                grid-template-columns: 75px 1fr;
+            }
+
+            .food-image {
+                width: 75px;
+                height: 75px;
+                font-size: 34px;
+            }
+
+            .quantity {
+                grid-column: 2;
+            }
+
+            .cart-item > .item-actions {
+                grid-column: 2;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- HEADER -->
+
+    <header class="topbar">
+
+        <button
+            class="back-btn"
+            onclick="goMenu()"
+        >
+            ←
+        </button>
+
+        <div class="logo">
+            INLIN<span>E</span>ASY
+        </div>
+
+        <div class="step">
+            STEP 01 / 03
+        </div>
+
+    </header>
+
+
+    <!-- INTRO -->
+
+    <section class="intro">
+
+        <div class="eyebrow">
+            YOUR ORDER
+        </div>
+
+        <h1>
+            Review your<br>
+            <span style="color:#00FF42;">
+                cart.
+            </span>
+        </h1>
+
+        <p>
+            Check your items before moving to checkout.
+        </p>
+
+    </section>
+
+
+    <!-- EMPTY -->
+
+    <section
+        class="empty"
+        id="emptyState"
+    >
+
+        <div class="empty-icon">
+            🛒
+        </div>
+
+        <h2>
+            Your cart is empty
+        </h2>
+
+        <p>
+            Add something delicious from the menu.
+        </p>
+
+        <button
+            class="menu-btn"
+            onclick="goMenu()"
+        >
+            EXPLORE MENU →
+        </button>
+
+    </section>
+
+
+    <!-- CART -->
+
+    <div
+        class="cart-layout"
+        id="cartLayout"
+    >
+
+        <section
+            class="items-panel"
+            id="itemsPanel"
+        >
+        </section>
+
+
+        <!-- SUMMARY -->
+
+        <aside class="summary">
+
+            <div class="summary-label">
+                ORDER SUMMARY
+            </div>
+
+            <h2>
+                Your total
+            </h2>
+
+            <div class="summary-row">
+
+                <span>
+                    Items
+                </span>
+
+                <span id="itemCount">
+                    0
+                </span>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <span id="subtotal">
+                    ₹0
+                </span>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>
+                    Packaging
+                </span>
+
+                <span>
+                    ₹10
+                </span>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>
+                    Delivery
+                </span>
+
+                <span style="color:#00FF42;">
+                    FREE
+                </span>
+
+            </div>
+
+            <div class="line"></div>
+
+            <div class="summary-row total-row">
+
+                <span>
+                    TOTAL
+                </span>
+
+                <span id="total">
+                    ₹0
+                </span>
+
+            </div>
+
+            <button
+                class="checkout-btn"
+                onclick="checkout()"
+            >
+                PROCEED TO CHECKOUT →
+            </button>
+
+            <button
+                class="continue-btn"
+                onclick="goMenu()"
+            >
+                ← CONTINUE SHOPPING
+            </button>
+
+        </aside>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    let cart =
+        JSON.parse(
+            localStorage.getItem("cart")
+        ) || [];
+
+
+    /* =========================
+       SAVE
+    ========================= */
+
+    function saveCart() {
+
+        localStorage.setItem(
+            "cart",
+            JSON.stringify(cart)
+        );
+
+    }
+
+
+    /* =========================
+       RENDER CART
+    ========================= */
+
+    function renderCart() {
+
+        const itemsPanel =
+            document.getElementById("itemsPanel");
+
+        const layout =
+            document.getElementById("cartLayout");
+
+        const empty =
+            document.getElementById("emptyState");
+
+        itemsPanel.innerHTML = "";
+
+        if (cart.length === 0) {
+
+            layout.style.display = "none";
+            empty.style.display = "block";
+
+            return;
+        }
+
+        layout.style.display = "grid";
+        empty.style.display = "none";
+
+
+        cart.forEach((item, index) => {
+
+            const quantity =
+                item.quantity || 1;
+
+            const total =
+                item.price * quantity;
+
+
+            const article =
+                document.createElement("article");
+
+            article.className = "cart-item";
+
+
+            article.innerHTML = `
+
+                <div class="food-image">
+                    ${getFoodEmoji(item.name)}
+                </div>
+
+                <div class="item-info">
+
+                    <h2>
+                        ${item.name}
+                    </h2>
+
+                    <p>
+                        Freshly prepared and
+                        ready for your order.
+                    </p>
+
+                    <span class="item-price">
+                        ₹${item.price}
+                    </span>
+
+                    <button
+                        class="remove-btn"
+                        onclick="removeItem(${index})"
+                    >
+                        REMOVE
+                    </button>
+
+                </div>
+
+                <div class="item-actions">
+
+                    <div class="quantity">
+
+                        <button
+                            class="qty-btn"
+                            onclick="changeQuantity(
+                                ${index},
+                                -1
+                            )"
+                        >
+                            −
+                        </button>
+
+                        <span class="qty-number">
+                            ${quantity}
+                        </span>
+
+                        <button
+                            class="qty-btn"
+                            onclick="changeQuantity(
+                                ${index},
+                                1
+                            )"
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+                    <div
+                        style="
+                            margin-top:12px;
+                            text-align:right;
+                            font-family:JetBrains Mono;
+                            font-size:13px;
+                            font-weight:700;
+                        "
+                    >
+                        ₹${total}
+                    </div>
+
+                </div>
+            `;
+
+            itemsPanel.appendChild(article);
+
+        });
+
+        updateSummary();
+
+    }
+
+
+    /* =========================
+       EMOJI
+    ========================= */
+
+    function getFoodEmoji(name) {
+
+        const lower =
+            name.toLowerCase();
+
+        if (lower.includes("burger")) {
+            return "🍔";
+        }
+
+        if (lower.includes("pizza")) {
+            return "🍕";
+        }
+
+        if (lower.includes("noodle")) {
+            return "🍜";
+        }
+
+        if (
+            lower.includes("lime") ||
+            lower.includes("drink")
+        ) {
+            return "🥤";
+        }
+
+        return "🍽️";
+
+    }
+
+
+    /* =========================
+       QUANTITY
+    ========================= */
+
+    function changeQuantity(index, amount) {
+
+        cart[index].quantity =
+            (cart[index].quantity || 1) + amount;
+
+        if (cart[index].quantity <= 0) {
+
+            cart.splice(index, 1);
+
+        }
+
+        saveCart();
+
+        renderCart();
+
+    }
+
+
+    /* =========================
+       REMOVE
+    ========================= */
+
+    function removeItem(index) {
+
+        cart.splice(index, 1);
+
+        saveCart();
+
+        renderCart();
+
+    }
+
+
+    /* =========================
+       SUMMARY
+    ========================= */
+
+    function updateSummary() {
+
+        let count = 0;
+        let subtotal = 0;
+
+        cart.forEach(item => {
+
+            const quantity =
+                item.quantity || 1;
+
+            count += quantity;
+
+            subtotal +=
+                item.price * quantity;
+
+        });
+
+        const packaging =
+            cart.length > 0 ? 10 : 0;
+
+        const total =
+            subtotal + packaging;
+
+
+        document
+            .getElementById("itemCount")
+            .textContent = count;
+
+        document
+            .getElementById("subtotal")
+            .textContent =
+                "₹" + subtotal;
+
+        document
+            .getElementById("total")
+            .textContent =
+                "₹" + total;
+
+    }
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    function goMenu() {
+
+        window.location.href =
+            "menu.html";
+
+    }
+
+
+    function checkout() {
+
+        if (cart.length === 0) {
+
+            return;
+
+        }
+
+        window.location.href =
+            "checkout.html";
+
+    }
+
+
+    /* =========================
+       START
+    ========================= */
+
+    renderCart();
+
+</script>
+
+</body>
+</html>

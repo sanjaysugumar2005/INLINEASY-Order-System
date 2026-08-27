@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INLINEASY — Order Confirmed</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+
+        :root {
+            --neon: #00FF42;
+            --green: #00C853;
+            --black: #080808;
+            --surface: #111111;
+            --white: #FFFFFF;
+            --gray: #A8A8A8;
+            --border: #303030;
+            --radius: 24px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 50% 15%,
+                    rgba(0,255,66,0.10),
+                    transparent 35%
+                ),
+                var(--black);
+
+            color: var(--white);
+
+            font-family: "Manrope", sans-serif;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .page {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 30px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+
+            text-align: center;
+        }
+
+        /* LOGO */
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+
+            margin-bottom: 55px;
+        }
+
+        .logo span {
+            color: var(--neon);
+        }
+
+        /* SUCCESS ICON */
+
+        .success-icon {
+            width: 92px;
+            height: 92px;
+
+            margin: auto auto 25px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                rgba(0,255,66,0.08);
+
+            border: 1px solid
+                rgba(0,255,66,0.35);
+
+            color: var(--neon);
+
+            font-size: 42px;
+
+            box-shadow:
+                0 0 60px
+                rgba(0,255,66,0.10);
+        }
+
+        .eyebrow {
+            color: var(--neon);
+
+            font-size: 10px;
+            font-weight: 800;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: clamp(38px, 7vw, 58px);
+
+            line-height: 1;
+
+            letter-spacing: -3px;
+        }
+
+        .green {
+            color: var(--neon);
+        }
+
+        .subtitle {
+            max-width: 440px;
+
+            margin: 16px auto 30px;
+
+            color: var(--gray);
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+        /* ORDER CARD */
+
+        .order-card {
+            text-align: left;
+
+            padding: 25px;
+
+            margin-top: 25px;
+
+            border: 1px solid
+                rgba(255,255,255,0.09);
+
+            border-radius: var(--radius);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.055),
+                    rgba(255,255,255,0.015)
+                );
+
+            backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 25px 70px
+                rgba(0,0,0,0.35);
+        }
+
+        .order-top {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+        }
+
+        .label {
+            color: var(--gray);
+
+            font-size: 9px;
+
+            letter-spacing: 1.5px;
+        }
+
+        .order-id {
+            color: var(--neon);
+
+            font-family:
+                "JetBrains Mono",
+                monospace;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+        .line {
+            height: 1px;
+
+            background: var(--border);
+
+            margin: 18px 0;
+        }
+
+        /* ITEMS */
+
+        .items {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+        }
+
+        .item {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            font-size: 11px;
+        }
+
+        .item-name {
+            color: var(--gray);
+        }
+
+        .item-price {
+            font-family:
+                "JetBrains Mono",
+                monospace;
+
+            white-space: nowrap;
+        }
+
+        /* INFO */
+
+        .info-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 10px;
+
+            margin-top: 20px;
+        }
+
+        .info {
+            padding: 13px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 14px;
+
+            background:
+                rgba(255,255,255,0.02);
+        }
+
+        .info small {
+            display: block;
+
+            color: #666;
+
+            font-size: 8px;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 5px;
+        }
+
+        .info strong {
+            display: block;
+
+            font-size: 11px;
+        }
+
+        /* TOTAL */
+
+        .total {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            margin-top: 20px;
+        }
+
+        .total span:first-child {
+            font-size: 13px;
+
+            font-weight: 800;
+        }
+
+        .total span:last-child {
+            color: var(--neon);
+
+            font-family:
+                "JetBrains Mono",
+                monospace;
+
+            font-size: 20px;
+
+            font-weight: 700;
+        }
+
+        /* BUTTONS */
+
+        .actions {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 10px;
+
+            margin-top: 25px;
+        }
+
+        .btn {
+            height: 52px;
+
+            border-radius: 13px;
+
+            font-size: 10px;
+
+            font-weight: 800;
+        }
+
+        .primary {
+            border: none;
+
+            background: var(--neon);
+
+            color: #000;
+        }
+
+        .primary:hover {
+            background: var(--green);
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 14px 35px
+                rgba(0,255,66,0.18);
+        }
+
+        .secondary {
+            border: 1px solid var(--border);
+
+            background: transparent;
+
+            color: var(--gray);
+        }
+
+        .secondary:hover {
+            color: white;
+
+            border-color: #555;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            margin-top: 25px;
+
+            color: #666;
+
+            font-size: 9px;
+        }
+
+        @media (max-width: 500px) {
+
+            .logo {
+                margin-bottom: 40px;
+            }
+
+            .success-icon {
+                width: 78px;
+                height: 78px;
+
+                font-size: 34px;
+            }
+
+            .order-card {
+                padding: 20px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .actions {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <main class="container">
+
+        <div class="logo">
+            INLIN<span>E</span>ASY
+        </div>
+
+
+        <!-- SUCCESS -->
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <div class="eyebrow">
+            ORDER CONFIRMED
+        </div>
+
+        <h1>
+            You're all<br>
+            <span class="green">
+                set.
+            </span>
+        </h1>
+
+        <p class="subtitle">
+            Your order has been successfully placed.
+            We've saved all your order details below.
+        </p>
+
+
+        <!-- ORDER CARD -->
+
+        <section class="order-card">
+
+            <div class="order-top">
+
+                <div>
+
+                    <div class="label">
+                        ORDER ID
+                    </div>
+
+                    <div
+                        class="order-id"
+                        id="orderId"
+                    >
+                        INL-000000
+                    </div>
+
+                </div>
+
+                <div
+                    style="
+                        padding:7px 11px;
+                        border-radius:50px;
+                        background:rgba(0,255,66,0.08);
+                        color:#00FF42;
+                        font-size:8px;
+                        font-weight:800;
+                    "
+                >
+                    CONFIRMED
+                </div>
+
+            </div>
+
+
+            <div class="line"></div>
+
+
+            <!-- ITEMS -->
+
+            <div
+                class="items"
+                id="items"
+            >
+            </div>
+
+
+            <div class="line"></div>
+
+
+            <!-- INFO -->
+
+            <div class="info-grid">
+
+                <div class="info">
+
+                    <small>
+                        CUSTOMER
+                    </small>
+
+                    <strong id="customerName">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="info">
+
+                    <small>
+                        ORDER TYPE
+                    </small>
+
+                    <strong id="orderType">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="info">
+
+                    <small>
+                        PAYMENT
+                    </small>
+
+                    <strong id="payment">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="info">
+
+                    <small>
+                        DATE
+                    </small>
+
+                    <strong id="orderDate">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOTAL -->
+
+            <div class="total">
+
+                <span>
+                    TOTAL PAID
+                </span>
+
+                <span id="total">
+                    ₹0
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- ACTIONS -->
+
+        <div class="actions">
+
+            <button
+                class="btn primary"
+                onclick="trackOrder()"
+            >
+                TRACK ORDER →
+            </button>
+
+            <button
+                class="btn secondary"
+                onclick="goHome()"
+            >
+                BACK TO HOME
+            </button>
+
+        </div>
+
+
+        <div class="footer">
+            Thank you for choosing INLINEASY.
+        </div>
+
+    </main>
+
+</div>
+
+
+<script>
+
+    /* =========================
+       LOAD ORDER
+    ========================= */
+
+    const order =
+        JSON.parse(
+            localStorage.getItem("latestOrder")
+        );
+
+
+    if (!order) {
+
+        document
+            .getElementById("orderId")
+            .textContent = "NO ORDER";
+
+    } else {
+
+        /* ORDER ID */
+
+        document
+            .getElementById("orderId")
+            .textContent =
+                order.orderId;
+
+
+        /* CUSTOMER */
+
+        document
+            .getElementById("customerName")
+            .textContent =
+                order.name;
+
+
+        /* ORDER TYPE */
+
+        document
+            .getElementById("orderType")
+            .textContent =
+                order.orderType;
+
+
+        /* PAYMENT */
+
+        document
+            .getElementById("payment")
+            .textContent =
+                order.payment;
+
+
+        /* DATE */
+
+        const date =
+            new Date(order.createdAt);
+
+        document
+            .getElementById("orderDate")
+            .textContent =
+                date.toLocaleDateString(
+                    "en-IN",
+                    {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric"
+                    }
+                );
+
+
+        /* TOTAL */
+
+        document
+            .getElementById("total")
+            .textContent =
+                "₹" + order.total;
+
+
+        /* ITEMS */
+
+        const items =
+            document.getElementById("items");
+
+        order.items.forEach(item => {
+
+            const quantity =
+                item.quantity || 1;
+
+            const price =
+                item.price * quantity;
+
+            const row =
+                document.createElement("div");
+
+            row.className = "item";
+
+            row.innerHTML = `
+
+                <span class="item-name">
+                    ${item.name} × ${quantity}
+                </span>
+
+                <span class="item-price">
+                    ₹${price}
+                </span>
+
+            `;
+
+            items.appendChild(row);
+
+        });
+
+    }
+
+
+    /* =========================
+       TRACK ORDER
+    ========================= */
+
+    function trackOrder() {
+
+        alert(
+            "Order tracking will be connected in the next module."
+        );
+
+    }
+
+
+    /* =========================
+       HOME
+    ========================= */
+
+    function goHome() {
+
+        window.location.href =
+            "home.html";
+
+    }
+
+</script>
+
+</body>
+</html>

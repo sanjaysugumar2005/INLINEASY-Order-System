@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INLINEASY — Home</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+
+        :root {
+            --neon: #00FF42;
+            --green: #00C853;
+
+            --black: #080808;
+            --surface: #111111;
+            --surface-2: #161616;
+
+            --white: #FFFFFF;
+            --gray: #A8A8A8;
+            --border: #303030;
+
+            --radius: 24px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 85% 0%,
+                    rgba(0, 255, 66, 0.08),
+                    transparent 28%
+                ),
+                var(--black);
+
+            color: var(--white);
+
+            font-family: "Manrope", sans-serif;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .app {
+            width: 100%;
+            max-width: 1400px;
+
+            margin: auto;
+
+            padding: 28px 5% 120px;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            height: 62px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 55px;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+
+            letter-spacing: -1.5px;
+        }
+
+        .logo span {
+            color: var(--neon);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .icon-btn {
+            width: 42px;
+            height: 42px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.03);
+
+            color: var(--white);
+
+            font-size: 17px;
+
+            transition: 0.25s ease;
+        }
+
+        .icon-btn:hover {
+            border-color: var(--neon);
+
+            color: var(--neon);
+        }
+
+        .profile {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            background: var(--neon);
+
+            color: #000;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: 800;
+        }
+
+        /* =========================
+           GREETING
+        ========================= */
+
+        .greeting {
+            margin-bottom: 30px;
+        }
+
+        .greeting small {
+            color: var(--gray);
+
+            font-size: 12px;
+        }
+
+        .greeting h1 {
+            margin-top: 7px;
+
+            font-size: clamp(30px, 5vw, 48px);
+
+            letter-spacing: -2px;
+
+            line-height: 1.05;
+        }
+
+        .greeting h1 span {
+            color: var(--neon);
+        }
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        .search-box {
+            position: relative;
+
+            margin-bottom: 38px;
+        }
+
+        .search-box input {
+            width: 100%;
+
+            height: 58px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 16px;
+
+            background: rgba(255,255,255,0.035);
+
+            color: var(--white);
+
+            padding: 0 20px 0 50px;
+
+            outline: none;
+
+            font-size: 13px;
+
+            transition: 0.25s ease;
+        }
+
+        .search-box input::placeholder {
+            color: #666;
+        }
+
+        .search-box input:focus {
+            border-color: rgba(0,255,66,0.45);
+
+            box-shadow:
+                0 0 0 3px rgba(0,255,66,0.05);
+        }
+
+        .search-icon {
+            position: absolute;
+
+            left: 19px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: var(--gray);
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 330px;
+
+            border: 1px solid rgba(0,255,66,0.13);
+
+            border-radius: 28px;
+
+            padding: 45px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            display: flex;
+            align-items: center;
+
+            margin-bottom: 60px;
+
+            background:
+                radial-gradient(
+                    circle at 85% 50%,
+                    rgba(0,255,66,0.11),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.055),
+                    rgba(255,255,255,0.015)
+                );
+
+            backdrop-filter: blur(18px);
+        }
+
+        .hero-content {
+            position: relative;
+
+            z-index: 2;
+
+            max-width: 620px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+
+            color: var(--neon);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 17px;
+        }
+
+        .hero h2 {
+            font-size: clamp(35px, 6vw, 62px);
+
+            line-height: 1;
+
+            letter-spacing: -3px;
+
+            margin-bottom: 17px;
+        }
+
+        .hero h2 span {
+            color: var(--neon);
+        }
+
+        .hero p {
+            color: var(--gray);
+
+            max-width: 450px;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+            margin-bottom: 25px;
+        }
+
+        .hero-btn {
+            height: 50px;
+
+            padding: 0 23px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            background: var(--neon);
+
+            color: #000;
+
+            font-weight: 800;
+
+            font-size: 12px;
+
+            transition: 0.25s ease;
+        }
+
+        .hero-btn:hover {
+            background: var(--green);
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 30px rgba(0,255,66,0.18);
+        }
+
+        .hero-food {
+            position: absolute;
+
+            right: 8%;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            font-size: 145px;
+
+            filter:
+                drop-shadow(
+                    0 25px 30px rgba(0,0,0,0.5)
+                );
+        }
+
+        .hero-glow {
+            position: absolute;
+
+            width: 300px;
+            height: 300px;
+
+            right: 2%;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(0,255,66,0.15),
+                    transparent 65%
+                );
+        }
+
+        /* =========================
+           SECTION
+        ========================= */
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-header {
+            display: flex;
+
+            align-items: flex-end;
+            justify-content: space-between;
+
+            margin-bottom: 22px;
+        }
+
+        .section-label {
+            color: var(--gray);
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 6px;
+        }
+
+        .section-title {
+            font-size: 27px;
+
+            letter-spacing: -1.3px;
+        }
+
+        .view-all {
+            color: var(--neon);
+
+            border: none;
+
+            background: transparent;
+
+            font-size: 11px;
+
+            font-weight: 800;
+        }
+
+        /* =========================
+           CATEGORIES
+        ========================= */
+
+        .categories {
+            display: grid;
+
+            grid-template-columns:
+                repeat(5, 1fr);
+
+            gap: 14px;
+        }
+
+        .category {
+            min-height: 135px;
+
+            padding: 22px;
+
+            border: 1px solid var(--border);
+
+            border-radius: var(--radius);
+
+            background:
+                rgba(255,255,255,0.025);
+
+            transition: 0.25s ease;
+        }
+
+        .category:hover,
+        .category.active {
+            border-color:
+                rgba(0,255,66,0.35);
+
+            background:
+                rgba(0,255,66,0.045);
+
+            transform: translateY(-4px);
+        }
+
+        .category-icon {
+            font-size: 29px;
+
+            margin-bottom: 17px;
+        }
+
+        .category h3 {
+            font-size: 13px;
+
+            margin-bottom: 4px;
+        }
+
+        .category p {
+            color: var(--gray);
+
+            font-size: 10px;
+        }
+
+        /* =========================
+           FOOD GRID
+        ========================= */
+
+        .food-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+        }
+
+        .food-card {
+            border: 1px solid var(--border);
+
+            border-radius: var(--radius);
+
+            padding: 13px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.045),
+                    rgba(255,255,255,0.012)
+                );
+
+            transition: 0.3s ease;
+        }
+
+        .food-card:hover {
+            transform: translateY(-5px);
+
+            border-color:
+                rgba(0,255,66,0.28);
+        }
+
+        .food-image {
+            height: 205px;
+
+            border-radius: 18px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #292929,
+                    #121212
+                );
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 75px;
+
+            position: relative;
+
+            margin-bottom: 17px;
+        }
+
+        .heart {
+            position: absolute;
+
+            top: 12px;
+            right: 12px;
+
+            width: 32px;
+            height: 32px;
+
+            border: 1px solid rgba(255,255,255,0.1);
+
+            border-radius: 50%;
+
+            background: rgba(0,0,0,0.45);
+
+            color: white;
+        }
+
+        .food-details {
+            padding: 0 5px 5px;
+        }
+
+        .food-top {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 6px;
+        }
+
+        .food-top h3 {
+            font-size: 15px;
+        }
+
+        .rating {
+            color: var(--neon);
+
+            font-size: 10px;
+
+            font-weight: 800;
+        }
+
+        .description {
+            color: var(--gray);
+
+            font-size: 10px;
+
+            line-height: 1.5;
+
+            margin-bottom: 15px;
+        }
+
+        .food-bottom {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+        .price {
+            font-family:
+                "JetBrains Mono",
+                monospace;
+
+            color: var(--white);
+
+            font-size: 15px;
+
+            font-weight: 700;
+        }
+
+        .add-btn {
+            padding: 9px 14px;
+
+            border: 1px solid var(--neon);
+
+            border-radius: 10px;
+
+            background: transparent;
+
+            color: var(--neon);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            transition: 0.2s ease;
+        }
+
+        .add-btn:hover {
+            background: var(--neon);
+
+            color: #000;
+        }
+
+        /* =========================
+           BOTTOM NAV
+        ========================= */
+
+        .bottom-nav {
+            position: fixed;
+
+            left: 50%;
+
+            bottom: 18px;
+
+            transform: translateX(-50%);
+
+            width: min(500px, calc(100% - 30px));
+
+            height: 68px;
+
+            padding: 8px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 5px;
+
+            border: 1px solid rgba(255,255,255,0.09);
+
+            border-radius: 22px;
+
+            background:
+                rgba(17,17,17,0.88);
+
+            backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.5);
+
+            z-index: 100;
+        }
+
+        .nav-item {
+            border: none;
+
+            background: transparent;
+
+            color: #777;
+
+            border-radius: 15px;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            transition: 0.2s ease;
+        }
+
+        .nav-item span {
+            display: block;
+
+            font-size: 17px;
+
+            margin-bottom: 3px;
+        }
+
+        .nav-item.active {
+            color: #000;
+
+            background: var(--neon);
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .hero-food {
+                right: 4%;
+                opacity: 0.8;
+            }
+
+            .categories {
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+
+            .food-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .app {
+                padding:
+                    20px
+                    20px
+                    115px;
+            }
+
+            .navbar {
+                margin-bottom: 40px;
+            }
+
+            .hero {
+                min-height: 390px;
+
+                padding: 30px 25px;
+
+                align-items: flex-start;
+            }
+
+            .hero-food {
+                top: auto;
+
+                bottom: 15px;
+
+                right: 30px;
+
+                transform: none;
+
+                font-size: 95px;
+            }
+
+            .hero-glow {
+                top: auto;
+
+                bottom: -100px;
+
+                right: -50px;
+
+                transform: none;
+            }
+
+            .hero h2 {
+                font-size: 42px;
+
+                letter-spacing: -2px;
+            }
+
+            .categories {
+                display: flex;
+
+                overflow-x: auto;
+
+                padding-bottom: 5px;
+
+                scrollbar-width: none;
+            }
+
+            .categories::-webkit-scrollbar {
+                display: none;
+            }
+
+            .category {
+                min-width: 125px;
+            }
+
+            .food-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .food-image {
+                height: 230px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="logo">
+            INLIN<span>E</span>ASY
+        </div>
+
+        <div class="nav-actions">
+
+            <button
+                class="icon-btn"
+                onclick="openCart()"
+                aria-label="Cart"
+            >
+                🛒
+            </button>
+
+            <div
+                class="profile"
+                id="profileInitial"
+            >
+                U
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- GREETING -->
+    <section class="greeting">
+
+        <small>
+            GOOD EVENING
+        </small>
+
+        <h1>
+            What are you craving,
+            <span id="userName">there</span>?
+        </h1>
+
+    </section>
+
+
+    <!-- SEARCH -->
+    <div class="search-box">
+
+        <span class="search-icon">
+            🔍
+        </span>
+
+        <input
+            type="search"
+            id="searchInput"
+            placeholder="Search dishes, restaurants or categories..."
+            oninput="searchFood()"
+        >
+
+    </div>
+
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="hero-tag">
+                INLINEASY SPECIAL
+            </div>
+
+            <h2>
+                ORDER NOW.<br>
+                SKIP THE <span>WAIT.</span>
+            </h2>
+
+            <p>
+                Choose your favourite food,
+                customise your order and enjoy
+                a faster restaurant experience.
+            </p>
+
+            <button
+                class="hero-btn"
+                onclick="openMenu()"
+            >
+                EXPLORE MENU →
+            </button>
+
+        </div>
+
+        <div class="hero-glow"></div>
+
+        <div class="hero-food">
+            🍕
+        </div>
+
+    </section>
+
+
+    <!-- CATEGORIES -->
+    <section class="section">
+
+        <div class="section-header">
+
+            <div>
+                <div class="section-label">
+                    Browse
+                </div>
+
+                <h2 class="section-title">
+                    Categories
+                </h2>
+            </div>
+
+            <button
+                class="view-all"
+                onclick="openMenu()"
+            >
+                VIEW ALL →
+            </button>
+
+        </div>
+
+
+        <div class="categories">
+
+            <div
+                class="category active"
+                onclick="selectCategory(this, 'All')"
+            >
+                <div class="category-icon">
+                    ✦
+                </div>
+
+                <h3>All</h3>
+
+                <p>120 items</p>
+            </div>
+
+            <div
+                class="category"
+                onclick="selectCategory(this, 'Burgers')"
+            >
+                <div class="category-icon">
+                    🍔
+                </div>
+
+                <h3>Burgers</h3>
+
+                <p>24 items</p>
+            </div>
+
+            <div
+                class="category"
+                onclick="selectCategory(this, 'Pizza')"
+            >
+                <div class="category-icon">
+                    🍕
+                </div>
+
+                <h3>Pizza</h3>
+
+                <p>18 items</p>
+            </div>
+
+            <div
+                class="category"
+                onclick="selectCategory(this, 'Noodles')"
+            >
+                <div class="category-icon">
+                    🍜
+                </div>
+
+                <h3>Noodles</h3>
+
+                <p>16 items</p>
+            </div>
+
+            <div
+                class="category"
+                onclick="selectCategory(this, 'Drinks')"
+            >
+                <div class="category-icon">
+                    🥤
+                </div>
+
+                <h3>Drinks</h3>
+
+                <p>22 items</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- POPULAR -->
+    <section class="section">
+
+        <div class="section-header">
+
+            <div>
+                <div class="section-label">
+                    Trending now
+                </div>
+
+                <h2 class="section-title">
+                    Popular near you
+                </h2>
+            </div>
+
+            <button
+                class="view-all"
+                onclick="openMenu()"
+            >
+                VIEW ALL →
+            </button>
+
+        </div>
+
+
+        <div
+            class="food-grid"
+            id="foodGrid"
+        >
+
+            <!-- CARD 1 -->
+            <article class="food-card">
+
+                <div class="food-image">
+
+                    <button
+                        class="heart"
+                        onclick="toggleFavourite(this)"
+                    >
+                        ♡
+                    </button>
+
+                    🍔
+
+                </div>
+
+                <div class="food-details">
+
+                    <div class="food-top">
+
+                        <h3>
+                            Classic Burger
+                        </h3>
+
+                        <span class="rating">
+                            ★ 4.8
+                        </span>
+
+                    </div>
+
+                    <p class="description">
+                        Crispy chicken, cheese
+                        and fresh vegetables.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">
+                            ₹249
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart('Classic Burger', 249)"
+                        >
+                            + ADD
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 2 -->
+            <article class="food-card">
+
+                <div class="food-image">
+
+                    <button
+                        class="heart"
+                        onclick="toggleFavourite(this)"
+                    >
+                        ♡
+                    </button>
+
+                    🍕
+
+                </div>
+
+                <div class="food-details">
+
+                    <div class="food-top">
+
+                        <h3>
+                            Loaded Pizza
+                        </h3>
+
+                        <span class="rating">
+                            ★ 4.9
+                        </span>
+
+                    </div>
+
+                    <p class="description">
+                        Cheese loaded pizza
+                        with premium toppings.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">
+                            ₹299
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart('Loaded Pizza', 299)"
+                        >
+                            + ADD
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 3 -->
+            <article class="food-card">
+
+                <div class="food-image">
+
+                    <button
+                        class="heart"
+                        onclick="toggleFavourite(this)"
+                    >
+                        ♡
+                    </button>
+
+                    🍜
+
+                </div>
+
+                <div class="food-details">
+
+                    <div class="food-top">
+
+                        <h3>
+                            Spicy Noodles
+                        </h3>
+
+                        <span class="rating">
+                            ★ 4.7
+                        </span>
+
+                    </div>
+
+                    <p class="description">
+                        Hot noodles with
+                        vegetables and spices.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">
+                            ₹199
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart('Spicy Noodles', 199)"
+                        >
+                            + ADD
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+
+    <button
+        class="nav-item active"
+        onclick="goHome()"
+    >
+        <span>⌂</span>
+        Home
+    </button>
+
+    <button
+        class="nav-item"
+        onclick="openMenu()"
+    >
+        <span>▦</span>
+        Menu
+    </button>
+
+    <button
+        class="nav-item"
+        onclick="openOrders()"
+    >
+        <span>◷</span>
+        Orders
+    </button>
+
+    <button
+        class="nav-item"
+        onclick="openProfile()"
+    >
+        <span>◉</span>
+        Profile
+    </button>
+
+</nav>
+
+
+<script>
+
+    /* =========================
+       USER DATA
+    ========================= */
+
+    const storedName =
+        localStorage.getItem("userName");
+
+    const userNameElement =
+        document.getElementById("userName");
+
+    const profileElement =
+        document.getElementById("profileInitial");
+
+    if (storedName) {
+
+        userNameElement.textContent =
+            storedName.split(" ")[0];
+
+        profileElement.textContent =
+            storedName.charAt(0).toUpperCase();
+
+    }
+
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    function searchFood() {
+
+        const query =
+            document
+                .getElementById("searchInput")
+                .value
+                .toLowerCase();
+
+        const cards =
+            document.querySelectorAll(".food-card");
+
+        cards.forEach(card => {
+
+            const text =
+                card.textContent.toLowerCase();
+
+            card.style.display =
+                text.includes(query)
+                    ? ""
+                    : "none";
+
+        });
+
+    }
+
+
+    /* =========================
+       CATEGORY
+    ========================= */
+
+    function selectCategory(element, category) {
+
+        document
+            .querySelectorAll(".category")
+            .forEach(item =>
+                item.classList.remove("active")
+            );
+
+        element.classList.add("active");
+
+        if (category === "All") {
+
+            document
+                .querySelectorAll(".food-card")
+                .forEach(card =>
+                    card.style.display = ""
+                );
+
+            return;
+        }
+
+        const cards =
+            document.querySelectorAll(".food-card");
+
+        cards.forEach(card => {
+
+            const text =
+                card.textContent.toLowerCase();
+
+            card.style.display =
+                text.includes(category.toLowerCase())
+                    ? ""
+                    : "none";
+
+        });
+
+    }
+
+
+    /* =========================
+       CART
+    ========================= */
+
+    function addToCart(name, price) {
+
+        let cart =
+            JSON.parse(
+                localStorage.getItem("cart")
+            ) || [];
+
+        cart.push({
+            name: name,
+            price: price
+        });
+
+        localStorage.setItem(
+            "cart",
+            JSON.stringify(cart)
+        );
+
+        alert(name + " added to cart 🛒");
+
+    }
+
+
+    function openCart() {
+
+        window.location.href =
+            "cart.html";
+
+    }
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    function openMenu() {
+
+        window.location.href =
+            "menu.html";
+
+    }
+
+
+    function openOrders() {
+
+        alert("Orders page coming next.");
+
+    }
+
+
+    function openProfile() {
+
+        alert("Profile page coming soon.");
+
+    }
+
+
+    function goHome() {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    function toggleFavourite(button) {
+
+        if (button.textContent.trim() === "♡") {
+
+            button.textContent = "♥";
+
+        } else {
+
+            button.textContent = "♡";
+
+        }
+
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INLINEASY — Menu</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+
+        :root {
+            --neon: #00FF42;
+            --green: #00C853;
+
+            --black: #080808;
+            --surface: #111111;
+            --surface-2: #161616;
+
+            --white: #FFFFFF;
+            --gray: #A8A8A8;
+            --border: #303030;
+
+            --radius: 24px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 80% 0%,
+                    rgba(0,255,66,0.07),
+                    transparent 28%
+                ),
+                var(--black);
+
+            color: var(--white);
+
+            font-family: "Manrope", sans-serif;
+
+            padding-bottom: 110px;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .app {
+            width: 100%;
+            max-width: 1400px;
+
+            margin: auto;
+
+            padding: 25px 5%;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .topbar {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 45px;
+        }
+
+        .back-btn {
+            width: 42px;
+            height: 42px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.03);
+
+            color: var(--white);
+
+            font-size: 18px;
+
+            transition: 0.2s ease;
+        }
+
+        .back-btn:hover {
+            border-color: var(--neon);
+            color: var(--neon);
+        }
+
+        .logo {
+            font-size: 25px;
+
+            font-weight: 800;
+
+            letter-spacing: -1.5px;
+        }
+
+        .logo span {
+            color: var(--neon);
+        }
+
+        .cart-btn {
+            position: relative;
+
+            width: 42px;
+            height: 42px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.03);
+
+            color: var(--white);
+
+            font-size: 17px;
+        }
+
+        .cart-count {
+            position: absolute;
+
+            top: -4px;
+            right: -3px;
+
+            min-width: 18px;
+            height: 18px;
+
+            padding: 0 5px;
+
+            border-radius: 50px;
+
+            background: var(--neon);
+
+            color: #000;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* =========================
+           HEADER TITLE
+        ========================= */
+
+        .page-intro {
+            margin-bottom: 30px;
+        }
+
+        .eyebrow {
+            color: var(--neon);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 9px;
+        }
+
+        .page-intro h1 {
+            font-size: clamp(36px, 5vw, 55px);
+
+            letter-spacing: -2.5px;
+
+            line-height: 1;
+        }
+
+        .page-intro p {
+            color: var(--gray);
+
+            font-size: 13px;
+
+            margin-top: 12px;
+        }
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        .search {
+            position: relative;
+
+            margin-bottom: 25px;
+        }
+
+        .search input {
+            width: 100%;
+
+            height: 56px;
+
+            padding: 0 20px 0 48px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 15px;
+
+            background: rgba(255,255,255,0.025);
+
+            color: var(--white);
+
+            outline: none;
+
+            font-size: 13px;
+        }
+
+        .search input::placeholder {
+            color: #666;
+        }
+
+        .search input:focus {
+            border-color: rgba(0,255,66,0.45);
+
+            box-shadow:
+                0 0 0 3px rgba(0,255,66,0.05);
+        }
+
+        .search-icon {
+            position: absolute;
+
+            left: 18px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: var(--gray);
+        }
+
+        /* =========================
+           FILTERS
+        ========================= */
+
+        .filters {
+            display: flex;
+
+            gap: 9px;
+
+            overflow-x: auto;
+
+            padding-bottom: 5px;
+
+            margin-bottom: 40px;
+
+            scrollbar-width: none;
+        }
+
+        .filters::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter {
+            flex-shrink: 0;
+
+            padding: 10px 17px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 50px;
+
+            background: transparent;
+
+            color: var(--gray);
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            transition: 0.2s ease;
+        }
+
+        .filter:hover,
+        .filter.active {
+            border-color: var(--neon);
+
+            background: var(--neon);
+
+            color: #000;
+        }
+
+        /* =========================
+           MENU GRID
+        ========================= */
+
+        .menu-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .food-card {
+            overflow: hidden;
+
+            border: 1px solid var(--border);
+
+            border-radius: var(--radius);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.045),
+                    rgba(255,255,255,0.012)
+                );
+
+            transition: 0.3s ease;
+        }
+
+        .food-card:hover {
+            transform: translateY(-6px);
+
+            border-color:
+                rgba(0,255,66,0.3);
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        /* =========================
+           FOOD IMAGE
+        ========================= */
+
+        .food-image {
+            height: 235px;
+
+            margin: 12px;
+
+            border-radius: 19px;
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    #303030,
+                    #121212 68%
+                );
+
+            font-size: 82px;
+        }
+
+        .tag {
+            position: absolute;
+
+            left: 12px;
+            top: 12px;
+
+            padding: 7px 10px;
+
+            border-radius: 50px;
+
+            background: rgba(0,0,0,0.65);
+
+            border: 1px solid rgba(255,255,255,0.1);
+
+            color: var(--neon);
+
+            font-size: 9px;
+
+            font-weight: 800;
+        }
+
+        .fav-btn {
+            position: absolute;
+
+            right: 12px;
+            top: 12px;
+
+            width: 34px;
+            height: 34px;
+
+            border: 1px solid rgba(255,255,255,0.12);
+
+            border-radius: 50%;
+
+            background: rgba(0,0,0,0.55);
+
+            color: var(--white);
+
+            font-size: 15px;
+        }
+
+        /* =========================
+           FOOD INFO
+        ========================= */
+
+        .food-info {
+            padding: 5px 18px 19px;
+        }
+
+        .food-title-row {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-bottom: 7px;
+        }
+
+        .food-title-row h2 {
+            font-size: 16px;
+        }
+
+        .rating {
+            color: var(--neon);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+        .description {
+            color: var(--gray);
+
+            font-size: 10px;
+
+            line-height: 1.6;
+
+            min-height: 32px;
+
+            margin-bottom: 17px;
+        }
+
+        .food-bottom {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .price {
+            font-family:
+                "JetBrains Mono",
+                monospace;
+
+            font-size: 16px;
+
+            font-weight: 700;
+        }
+
+        .add-btn {
+            height: 38px;
+
+            padding: 0 16px;
+
+            border: 1px solid var(--neon);
+
+            border-radius: 10px;
+
+            background: transparent;
+
+            color: var(--neon);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            transition: 0.2s ease;
+        }
+
+        .add-btn:hover {
+            background: var(--neon);
+
+            color: #000;
+        }
+
+        /* =========================
+           EMPTY STATE
+        ========================= */
+
+        .empty {
+            display: none;
+
+            text-align: center;
+
+            padding: 70px 20px;
+
+            border: 1px dashed var(--border);
+
+            border-radius: var(--radius);
+
+            color: var(--gray);
+        }
+
+        .empty-icon {
+            font-size: 45px;
+
+            margin-bottom: 15px;
+        }
+
+        .empty h3 {
+            color: var(--white);
+
+            margin-bottom: 7px;
+        }
+
+        .empty p {
+            font-size: 12px;
+        }
+
+        /* =========================
+           MOBILE CART BAR
+        ========================= */
+
+        .cart-bar {
+            position: fixed;
+
+            left: 50%;
+
+            bottom: 18px;
+
+            transform: translateX(-50%);
+
+            width: min(520px, calc(100% - 30px));
+
+            min-height: 65px;
+
+            padding: 8px 9px 8px 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            border: 1px solid rgba(255,255,255,0.1);
+
+            border-radius: 20px;
+
+            background:
+                rgba(17,17,17,0.9);
+
+            backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.55);
+
+            z-index: 50;
+        }
+
+        .cart-info small {
+            display: block;
+
+            color: var(--gray);
+
+            font-size: 9px;
+
+            margin-bottom: 3px;
+        }
+
+        .cart-total {
+            font-family:
+                "JetBrains Mono",
+                monospace;
+
+            font-size: 14px;
+
+            font-weight: 700;
+        }
+
+        .checkout-btn {
+            height: 48px;
+
+            padding: 0 19px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            background: var(--neon);
+
+            color: #000;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            transition: 0.2s ease;
+        }
+
+        .checkout-btn:hover {
+            background: var(--green);
+
+            transform: translateY(-1px);
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 950px) {
+
+            .menu-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .app {
+                padding: 20px 20px 110px;
+            }
+
+            .topbar {
+                margin-bottom: 35px;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .food-image {
+                height: 245px;
+            }
+
+            .page-intro h1 {
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+
+        <button
+            class="back-btn"
+            onclick="goBack()"
+            aria-label="Back"
+        >
+            ←
+        </button>
+
+        <div class="logo">
+            INLIN<span>E</span>ASY
+        </div>
+
+        <button
+            class="cart-btn"
+            onclick="openCart()"
+            aria-label="Cart"
+        >
+            🛒
+
+            <span
+                class="cart-count"
+                id="cartCount"
+            >
+                0
+            </span>
+
+        </button>
+
+    </header>
+
+
+    <!-- INTRO -->
+    <section class="page-intro">
+
+        <div class="eyebrow">
+            EXPLORE OUR MENU
+        </div>
+
+        <h1>
+            Choose your<br>
+            <span style="color:#00FF42;">
+                favourite.
+            </span>
+        </h1>
+
+        <p>
+            Freshly prepared dishes, made for your next order.
+        </p>
+
+    </section>
+
+
+    <!-- SEARCH -->
+    <div class="search">
+
+        <span class="search-icon">
+            🔍
+        </span>
+
+        <input
+            type="search"
+            id="searchInput"
+            placeholder="Search dishes..."
+            oninput="searchMenu()"
+        >
+
+    </div>
+
+
+    <!-- FILTERS -->
+    <div class="filters">
+
+        <button
+            class="filter active"
+            onclick="filterMenu('all', this)"
+        >
+            All
+        </button>
+
+        <button
+            class="filter"
+            onclick="filterMenu('burger', this)"
+        >
+            🍔 Burgers
+        </button>
+
+        <button
+            class="filter"
+            onclick="filterMenu('pizza', this)"
+        >
+            🍕 Pizza
+        </button>
+
+        <button
+            class="filter"
+            onclick="filterMenu('noodles', this)"
+        >
+            🍜 Noodles
+        </button>
+
+        <button
+            class="filter"
+            onclick="filterMenu('drinks', this)"
+        >
+            🥤 Drinks
+        </button>
+
+    </div>
+
+
+    <!-- MENU -->
+    <main>
+
+        <div
+            class="menu-grid"
+            id="menuGrid"
+        >
+
+            <!-- BURGER -->
+            <article
+                class="food-card"
+                data-category="burger"
+                data-name="Classic Chicken Burger"
+            >
+
+                <div class="food-image">
+
+                    <span class="tag">
+                        BESTSELLER
+                    </span>
+
+                    <button
+                        class="fav-btn"
+                        onclick="favourite(this)"
+                    >
+                        ♡
+                    </button>
+
+                    🍔
+
+                </div>
+
+                <div class="food-info">
+
+                    <div class="food-title-row">
+
+                        <h2>
+                            Classic Chicken Burger
+                        </h2>
+
+                        <span class="rating">
+                            ★ 4.8
+                        </span>
+
+                    </div>
+
+                    <p class="description">
+                        Crispy chicken, melted cheese
+                        and fresh vegetables.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">
+                            ₹249
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(
+                                'Classic Chicken Burger',
+                                249
+                            )"
+                        >
+                            + ADD
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PIZZA -->
+            <article
+                class="food-card"
+                data-category="pizza"
+                data-name="Loaded Cheese Pizza"
+            >
+
+                <div class="food-image">
+
+                    <span class="tag">
+                        POPULAR
+                    </span>
+
+                    <button
+                        class="fav-btn"
+                        onclick="favourite(this)"
+                    >
+                        ♡
+                    </button>
+
+                    🍕
+
+                </div>
+
+                <div class="food-info">
+
+                    <div class="food-title-row">
+
+                        <h2>
+                            Loaded Cheese Pizza
+                        </h2>
+
+                        <span class="rating">
+                            ★ 4.9
+                        </span>
+
+                    </div>
+
+                    <p class="description">
+                        Extra cheese with premium
+                        fresh toppings.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">
+                            ₹299
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(
+                                'Loaded Cheese Pizza',
+                                299
+                            )"
+                        >
+                            + ADD
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- NOODLES -->
+            <article
+                class="food-card"
+                data-category="noodles"
+                data-name="Spicy Schezwan Noodles"
+            >
+
+                <div class="food-image">
+
+                    <span class="tag">
+                        SPICY
+                    </span>
+
+                    <button
+                        class="fav-btn"
+                        onclick="favourite(this)"
+                    >
+                        ♡
+                    </button>
+
+                    🍜
+
+                </div>
+
+                <div class="food-info">
+
+                    <div class="food-title-row">
+
+                        <h2>
+                            Spicy Schezwan Noodles
+                        </h2>
+
+                        <span class="rating">
+                            ★ 4.7
+                        </span>
+
+                    </div>
+
+                    <p class="description">
+                        Hot noodles tossed with
+                        vegetables and Schezwan sauce.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">
+                            ₹199
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(
+                                'Spicy Schezwan Noodles',
+                                199
+                            )"
+                        >
+                            + ADD
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- BURGER -->
+            <article
+                class="food-card"
+                data-category="burger"
+                data-name="Double Cheese Burger"
+            >
+
+                <div class="food-image">
+
+                    <button
+                        class="fav-btn"
+                        onclick="favourite(this)"
+                    >
+                        ♡
+                    </button>
+
+                    🍔
+
+                </div>
+
+                <div class="food-info">
+
+                    <div class="food-title-row">
+
+                        <h2>
+                            Double Cheese Burger
+                        </h2>
+
+                        <span class="rating">
+                            ★ 4.8
+                        </span>
+
+                    </div>
+
+                    <p class="description">
+                        Double patty, double cheese
+                        and signature sauce.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">
+                            ₹329
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(
+                                'Double Cheese Burger',
+                                329
+                            )"
+                        >
+                            + ADD
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PIZZA -->
+            <article
+                class="food-card"
+                data-category="pizza"
+                data-name="Veggie Supreme Pizza"
+            >
+
+                <div class="food-image">
+
+                    <button
+                        class="fav-btn"
+                        onclick="favourite(this)"
+                    >
+                        ♡
+                    </button>
+
+                    🍕
+
+                </div>
+
+                <div class="food-info">
+
+                    <div class="food-title-row">
+
+                        <h2>
+                            Veggie Supreme Pizza
+                        </h2>
+
+                        <span class="rating">
+                            ★ 4.6
+                        </span>
+
+                    </div>
+
+                    <p class="description">
+                        Bell peppers, onions, olives
+                        and mozzarella.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">
+                            ₹279
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(
+                                'Veggie Supreme Pizza',
+                                279
+                            )"
+                        >
+                            + ADD
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- DRINK -->
+            <article
+                class="food-card"
+                data-category="drinks"
+                data-name="Fresh Lime Soda"
+            >
+
+                <div class="food-image">
+
+                    <span class="tag">
+                        REFRESHING
+                    </span>
+
+                    <button
+                        class="fav-btn"
+                        onclick="favourite(this)"
+                    >
+                        ♡
+                    </button>
+
+                    🥤
+
+                </div>
+
+                <div class="food-info">
+
+                    <div class="food-title-row">
+
+                        <h2>
+                            Fresh Lime Soda
+                        </h2>
+
+                        <span class="rating">
+                            ★ 4.8
+                        </span>
+
+                    </div>
+
+                    <p class="description">
+                        Chilled fresh lime with
+                        a refreshing fizz.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">
+                            ₹99
+                        </span>
+
+                        <button
+                            class="add-btn"
+                            onclick="addToCart(
+                                'Fresh Lime Soda',
+                                99
+                            )"
+                        >
+                            + ADD
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+
+        <div
+            class="empty"
+            id="emptyState"
+        >
+
+            <div class="empty-icon">
+                🔍
+            </div>
+
+            <h3>
+                No dishes found
+            </h3>
+
+            <p>
+                Try another search or category.
+            </p>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- CART BAR -->
+<div class="cart-bar">
+
+    <div class="cart-info">
+
+        <small>
+            YOUR CART
+        </small>
+
+        <div
+            class="cart-total"
+            id="cartTotal"
+        >
+            ₹0
+        </div>
+
+    </div>
+
+    <button
+        class="checkout-btn"
+        onclick="openCart()"
+    >
+        VIEW CART →
+    </button>
+
+</div>
+
+
+<script>
+
+    /* =========================
+       CART
+    ========================= */
+
+    let cart =
+        JSON.parse(
+            localStorage.getItem("cart")
+        ) || [];
+
+
+    function saveCart() {
+
+        localStorage.setItem(
+            "cart",
+            JSON.stringify(cart)
+        );
+
+        updateCartUI();
+
+    }
+
+
+    function addToCart(name, price) {
+
+        const existing =
+            cart.find(item =>
+                item.name === name
+            );
+
+        if (existing) {
+
+            existing.quantity =
+                (existing.quantity || 1) + 1;
+
+        } else {
+
+            cart.push({
+                name: name,
+                price: price,
+                quantity: 1
+            });
+
+        }
+
+        saveCart();
+
+        const button =
+            event.currentTarget;
+
+        const original =
+            button.textContent;
+
+        button.textContent = "✓ ADDED";
+
+        setTimeout(() => {
+
+            button.textContent = original;
+
+        }, 800);
+
+    }
+
+
+    function updateCartUI() {
+
+        const count =
+            cart.reduce(
+                (total, item) =>
+                    total + (item.quantity || 1),
+                0
+            );
+
+        const total =
+            cart.reduce(
+                (sum, item) =>
+                    sum +
+                    item.price *
+                    (item.quantity || 1),
+                0
+            );
+
+        document
+            .getElementById("cartCount")
+            .textContent = count;
+
+        document
+            .getElementById("cartTotal")
+            .textContent =
+                "₹" + total;
+
+    }
+
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    function searchMenu() {
+
+        const query =
+            document
+                .getElementById("searchInput")
+                .value
+                .toLowerCase()
+                .trim();
+
+        const cards =
+            document.querySelectorAll(".food-card");
+
+        let visible = 0;
+
+        cards.forEach(card => {
+
+            const name =
+                card.dataset.name.toLowerCase();
+
+            const category =
+                card.dataset.category.toLowerCase();
+
+            const match =
+                name.includes(query) ||
+                category.includes(query);
+
+            card.style.display =
+                match ? "" : "none";
+
+            if (match) {
+                visible++;
+            }
+
+        });
+
+        document
+            .getElementById("emptyState")
+            .style.display =
+                visible === 0
+                    ? "block"
+                    : "none";
+
+    }
+
+
+    /* =========================
+       FILTER
+    ========================= */
+
+    function filterMenu(category, button) {
+
+        document
+            .querySelectorAll(".filter")
+            .forEach(item =>
+                item.classList.remove("active")
+            );
+
+        button.classList.add("active");
+
+        const cards =
+            document.querySelectorAll(".food-card");
+
+        let visible = 0;
+
+        cards.forEach(card => {
+
+            const match =
+                category === "all" ||
+                card.dataset.category === category;
+
+            card.style.display =
+                match ? "" : "none";
+
+            if (match) {
+                visible++;
+            }
+
+        });
+
+        document
+            .getElementById("emptyState")
+            .style.display =
+                visible === 0
+                    ? "block"
+                    : "none";
+
+    }
+
+
+    /* =========================
+       FAVOURITE
+    ========================= */
+
+    function favourite(button) {
+
+        if (
+            button.textContent.trim() === "♡"
+        ) {
+
+            button.textContent = "♥";
+
+            button.style.color =
+                "#00FF42";
+
+        } else {
+
+            button.textContent = "♡";
+
+            button.style.color =
+                "#FFFFFF";
+
+        }
+
+    }
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    function goBack() {
+
+        window.location.href =
+            "home.html";
+
+    }
+
+
+    function openCart() {
+
+        window.location.href =
+            "cart.html";
+
+    }
+
+
+    /* =========================
+       INIT
+    ========================= */
+
+    updateCartUI();
+
+</script>
+
+</body>
+</html>

@@ -30,9 +30,11 @@ jobs:
       - name: Prepare website
         run: |
           mkdir -p _site
-          cp -r frontend/* _site/
+          cp index.html _site/
           cp -r css _site/
           cp -r js _site/
+          cp -r assets _site/
+          cp -r pages _site/
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>INLINEASY — Track Order</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root{
+    --neon:#00FF42;
+    --green:#00C853;
+    --black:#080808;
+    --surface:#111111;
+    --surface2:#161616;
+    --white:#FFFFFF;
+    --gray:#A8A8A8;
+    --border:#303030;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(0,255,66,.09),
+            transparent 34%
+        ),
+        var(--black);
+    color:var(--white);
+    font-family:"Manrope",sans-serif;
+}
+
+button{
+    font-family:inherit;
+    cursor:pointer;
+}
+
+.app{
+    width:100%;
+    max-width:900px;
+    margin:auto;
+    padding:25px 5% 60px;
+}
+
+/* HEADER */
+
+.topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:55px;
+}
+
+.back{
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.03);
+    color:white;
+    font-size:18px;
+}
+
+.back:hover{
+    color:var(--neon);
+    border-color:var(--neon);
+}
+
+.logo{
+    font-size:25px;
+    font-weight:800;
+    letter-spacing:-1.5px;
+}
+
+.logo span{
+    color:var(--neon);
+}
+
+.status{
+    color:var(--neon);
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:1.5px;
+}
+
+/* HERO */
+
+.hero{
+    text-align:center;
+    margin-bottom:38px;
+}
+
+.icon{
+    width:76px;
+    height:76px;
+    margin:auto auto 20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    color:var(--neon);
+    font-size:30px;
+
+    background:rgba(0,255,66,.07);
+    border:1px solid rgba(0,255,66,.3);
+
+    box-shadow:
+        0 0 55px rgba(0,255,66,.08);
+}
+
+.eyebrow{
+    color:var(--neon);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:2px;
+    margin-bottom:10px;
+}
+
+h1{
+    font-size:clamp(38px,7vw,58px);
+    line-height:1;
+    letter-spacing:-3px;
+}
+
+.hero p{
+    max-width:430px;
+    margin:15px auto 0;
+    color:var(--gray);
+    font-size:13px;
+    line-height:1.7;
+}
+
+/* ORDER ID */
+
+.order-id{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    margin-top:20px;
+}
+
+.order-id span:first-child{
+    color:#666;
+    font-size:9px;
+    letter-spacing:1px;
+}
+
+.order-id strong{
+    color:var(--neon);
+    font-family:"JetBrains Mono",monospace;
+    font-size:12px;
+}
+
+/* TRACKING CARD */
+
+.tracking-card{
+    padding:30px;
+
+    border:1px solid var(--border);
+    border-radius:24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.012)
+        );
+
+    backdrop-filter:blur(20px);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.3);
+}
+
+/* PROGRESS */
+
+.progress{
+    position:relative;
+    padding:5px 0 5px;
+}
+
+.progress-line{
+    position:absolute;
+
+    left:27px;
+    top:30px;
+
+    width:2px;
+    height:calc(100% - 60px);
+
+    background:var(--border);
+}
+
+.progress-line-active{
+    position:absolute;
+
+    left:27px;
+    top:30px;
+
+    width:2px;
+    height:38%;
+
+    background:var(--neon);
+
+    box-shadow:
+        0 0 12px rgba(0,255,66,.5);
+}
+
+.step{
+    position:relative;
+
+    display:grid;
+    grid-template-columns:55px 1fr auto;
+
+    gap:15px;
+
+    min-height:105px;
+}
+
+.step:last-child{
+    min-height:70px;
+}
+
+.step-dot{
+    width:54px;
+    height:54px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:1px solid var(--border);
+
+    background:var(--surface);
+
+    color:#555;
+
+    font-size:17px;
+
+    z-index:2;
+}
+
+.step.completed .step-dot,
+.step.active .step-dot{
+    border-color:var(--neon);
+    color:#000;
+    background:var(--neon);
+
+    box-shadow:
+        0 0 25px rgba(0,255,66,.14);
+}
+
+.step.active .step-dot{
+    animation:pulse 1.8s infinite;
+}
+
+.step-content{
+    padding-top:6px;
+}
+
+.step-title{
+    font-size:14px;
+    font-weight:800;
+}
+
+.step-desc{
+    color:var(--gray);
+    font-size:10px;
+    margin-top:5px;
+    line-height:1.5;
+}
+
+.step-time{
+    color:#666;
+    font-family:"JetBrains Mono",monospace;
+    font-size:8px;
+    padding-top:8px;
+}
+
+.step.active .step-time{
+    color:var(--neon);
+}
+
+/* INFO */
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:25px;
+}
+
+.info{
+    padding:16px;
+
+    border:1px solid var(--border);
+    border-radius:15px;
+
+    background:rgba(255,255,255,.02);
+}
+
+.info small{
+    display:block;
+    color:#666;
+    font-size:8px;
+    letter-spacing:1px;
+    margin-bottom:6px;
+}
+
+.info strong{
+    font-size:11px;
+}
+
+/* ACTION */
+
+.action{
+    width:100%;
+    height:53px;
+
+    margin-top:20px;
+
+    border:none;
+    border-radius:14px;
+
+    background:var(--neon);
+    color:#000;
+
+    font-size:10px;
+    font-weight:800;
+
+    transition:.25s;
+}
+
+.action:hover{
+    background:var(--green);
+    transform:translateY(-2px);
+    box-shadow:
+        0 14px 35px rgba(0,255,66,.18);
+}
+
+/* ANIMATION */
+
+@keyframes pulse{
+    0%{
+        box-shadow:
+            0 0 0 0 rgba(0,255,66,.35);
+    }
+
+    70%{
+        box-shadow:
+            0 0 0 12px rgba(0,255,66,0);
+    }
+
+    100%{
+        box-shadow:
+            0 0 0 0 rgba(0,255,66,0);
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .app{
+        padding:20px 18px 45px;
+    }
+
+    .topbar{
+        margin-bottom:42px;
+    }
+
+    .tracking-card{
+        padding:22px;
+    }
+
+    .step{
+        grid-template-columns:48px 1fr;
+        gap:13px;
+    }
+
+    .step-dot{
+        width:48px;
+        height:48px;
+    }
+
+    .progress-line,
+    .progress-line-active{
+        left:24px;
+    }
+
+    .step-time{
+        grid-column:2;
+        padding-top:0;
+        margin-top:-30px;
+        margin-bottom:30px;
+    }
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- HEADER -->
+
+    <header class="topbar">
+
+        <button
+            class="back"
+            onclick="goBack()"
+        >
+            ←
+        </button>
+
+        <div class="logo">
+            INLIN<span>E</span>ASY
+        </div>
+
+        <div class="status">
+            LIVE TRACKING
+        </div>
+
+    </header>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="icon">
+            ✓
+        </div>
+
+        <div class="eyebrow">
+            ORDER STATUS
+        </div>
+
+        <h1>
+            On its<br>
+            <span style="color:#00FF42;">
+                way.
+            </span>
+        </h1>
+
+        <p>
+            Your order is being prepared.
+            We'll keep you updated as it moves
+            through each stage.
+        </p>
+
+        <div class="order-id">
+
+            <span>
+                ORDER
+            </span>
+
+            <strong id="orderId">
+                INL-000000
+            </strong>
+
+        </div>
+
+    </section>
+
+
+    <!-- TRACKING -->
+
+    <section class="tracking-card">
+
+        <div class="progress">
+
+            <div class="progress-line"></div>
+
+            <div class="progress-line-active"></div>
+
+
+            <!-- STEP 1 -->
+
+            <div class="step completed">
+
+                <div class="step-dot">
+                    ✓
+                </div>
+
+                <div class="step-content">
+
+                    <div class="step-title">
+                        Order Confirmed
+                    </div>
+
+                    <div class="step-desc">
+                        We've received your order
+                        successfully.
+                    </div>
+
+                </div>
+
+                <div class="step-time">
+                    DONE
+                </div>
+
+            </div>
+
+
+            <!-- STEP 2 -->
+
+            <div class="step active">
+
+                <div class="step-dot">
+                    🍳
+                </div>
+
+                <div class="step-content">
+
+                    <div class="step-title">
+                        Preparing
+                    </div>
+
+                    <div class="step-desc">
+                        Our kitchen is preparing
+                        your food fresh.
+                    </div>
+
+                </div>
+
+                <div class="step-time">
+                    NOW
+                </div>
+
+            </div>
+
+
+            <!-- STEP 3 -->
+
+            <div class="step">
+
+                <div class="step-dot">
+                    ✓
+                </div>
+
+                <div class="step-content">
+
+                    <div class="step-title">
+                        Ready
+                    </div>
+
+                    <div class="step-desc">
+                        Your order will be ready
+                        for pickup or delivery.
+                    </div>
+
+                </div>
+
+                <div class="step-time">
+                    —
+                </div>
+
+            </div>
+
+
+            <!-- STEP 4 -->
+
+            <div class="step">
+
+                <div class="step-dot">
+                    ★
+                </div>
+
+                <div class="step-content">
+
+                    <div class="step-title">
+                        Completed
+                    </div>
+
+                    <div class="step-desc">
+                        Enjoy your meal!
+                    </div>
+
+                </div>
+
+                <div class="step-time">
+                    —
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- INFO -->
+
+        <div class="info-grid">
+
+            <div class="info">
+
+                <small>
+                    CUSTOMER
+                </small>
+
+                <strong id="customer">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="info">
+
+                <small>
+                    ORDER TYPE
+                </small>
+
+                <strong id="orderType">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="info">
+
+                <small>
+                    TOTAL
+                </small>
+
+                <strong
+                    id="total"
+                    style="color:#00FF42;"
+                >
+                    ₹0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="action"
+            onclick="goHome()"
+        >
+            BACK TO HOME →
+        </button>
+
+    </section>
+
+</div>
+
+
+<script>
+
+    const order =
+        JSON.parse(
+            localStorage.getItem("latestOrder")
+        );
+
+
+    if(order){
+
+        document
+            .getElementById("orderId")
+            .textContent =
+                order.orderId;
+
+
+        document
+            .getElementById("customer")
+            .textContent =
+                order.name;
+
+
+        document
+            .getElementById("orderType")
+            .textContent =
+                order.orderType;
+
+
+        document
+            .getElementById("total")
+            .textContent =
+                "₹" + order.total;
+
+    }
+
+
+    function goBack(){
+
+        window.location.href =
+            "success.html";
+
+    }
+
+
+    function goHome(){
+
+        window.location.href =
+            "home.html";
+
+    }
+
+</script>
+
+</body>
+</html>

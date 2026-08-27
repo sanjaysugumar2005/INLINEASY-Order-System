@@ -34,11 +34,12 @@ jobs:
           cp -r css _site/
           cp -r js _site/
           cp -r pages _site/
-       - name: Configure Pages
-          uses: actions/configure-pages@v5
-          with:
-          enablement: true
+          cp -r assets _site/
 
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

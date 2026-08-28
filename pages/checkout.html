@@ -1092,8 +1092,6 @@
             Date.now()
                 .toString()
                 .slice(-6);
-
-
         const order = {
 
             orderId: orderId,
@@ -1118,6 +1116,8 @@
 
             total: total,
 
+            status: "confirmed",
+
             createdAt:
                 new Date().toISOString()
 
@@ -1126,6 +1126,7 @@
 
         localStorage.setItem(
             "latestOrder",
+
             JSON.stringify(order)
         );
 

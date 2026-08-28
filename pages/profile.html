@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>INLINEASY — Profile</title>
+
+    <style>
+
+        @import url(
+            'https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap'
+        );
+
+        :root {
+
+            --neon: #00FF42;
+            --green: #00C853;
+
+            --black: #080808;
+            --surface: #111111;
+            --surface2: #161616;
+
+            --white: #FFFFFF;
+            --gray: #A8A8A8;
+
+            --border: #303030;
+
+        }
+
+
+        * {
+
+            margin: 0;
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 85% 5%,
+                    rgba(0,255,66,0.09),
+                    transparent 30%
+                ),
+                var(--black);
+
+            color: var(--white);
+
+            font-family: "Manrope", sans-serif;
+
+            padding: 24px;
+
+        }
+
+
+        .page {
+
+            width: 100%;
+            max-width: 700px;
+
+            margin: auto;
+
+        }
+
+
+        /* HEADER */
+
+        header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 35px;
+
+        }
+
+
+        .logo {
+
+            font-size: 27px;
+
+            font-weight: 800;
+
+            letter-spacing: -1.5px;
+
+        }
+
+
+        .logo span {
+
+            color: var(--neon);
+
+        }
+
+
+        .back {
+
+            border: 1px solid var(--border);
+
+            background: var(--surface);
+
+            color: var(--gray);
+
+            padding: 10px 15px;
+
+            border-radius: 12px;
+
+            cursor: pointer;
+
+            font-weight: 700;
+
+        }
+
+
+        .back:hover {
+
+            color: var(--white);
+
+            border-color: var(--neon);
+
+        }
+
+
+        /* HEADING */
+
+        .heading {
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .eyebrow {
+
+            color: var(--neon);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        h1 {
+
+            font-size: 42px;
+
+            letter-spacing: -2px;
+
+        }
+
+
+        .subtitle {
+
+            color: var(--gray);
+
+            font-size: 13px;
+
+            margin-top: 8px;
+
+        }
+
+
+        /* PROFILE CARD */
+
+        .profile-card {
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.055),
+                    rgba(255,255,255,0.015)
+                );
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            border-radius: 24px;
+
+            padding: 25px;
+
+            margin-bottom: 16px;
+
+        }
+
+
+        .profile-top {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .avatar {
+
+            width: 70px;
+
+            height: 70px;
+
+            border-radius: 50%;
+
+            background: var(--neon);
+
+            color: #000;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 26px;
+
+            font-weight: 800;
+
+        }
+
+
+        .profile-name {
+
+            font-size: 22px;
+
+            font-weight: 800;
+
+        }
+
+
+        .profile-email {
+
+            color: var(--gray);
+
+            font-size: 12px;
+
+            margin-top: 5px;
+
+        }
+
+
+        /* INFO */
+
+        .info-grid {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 12px;
+
+        }
+
+
+        .info {
+
+            background: rgba(255,255,255,0.025);
+
+            border: 1px solid var(--border);
+
+            border-radius: 16px;
+
+            padding: 16px;
+
+        }
+
+
+        .info small {
+
+            display: block;
+
+            color: #777;
+
+            font-size: 9px;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .info strong {
+
+            font-size: 14px;
+
+            word-break: break-word;
+
+        }
+
+
+        /* ACTIONS */
+
+        .actions {
+
+            display: grid;
+
+            gap: 12px;
+
+        }
+
+
+        .action {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border-radius: 14px;
+
+            border: 1px solid var(--border);
+
+            background: var(--surface);
+
+            color: var(--white);
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            text-align: left;
+
+        }
+
+
+        .action:hover {
+
+            border-color: var(--neon);
+
+        }
+
+
+        .action.primary {
+
+            background: var(--neon);
+
+            color: #000;
+
+            border-color: var(--neon);
+
+            text-align: center;
+
+        }
+
+
+        .action.primary:hover {
+
+            background: var(--green);
+
+        }
+
+
+        .logout {
+
+            background: transparent;
+
+            border: 1px solid rgba(255,80,80,0.35);
+
+            color: #ff7070;
+
+            text-align: center;
+
+        }
+
+
+        .logout:hover {
+
+            border-color: #ff7070;
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            body {
+
+                padding: 15px;
+
+            }
+
+
+            h1 {
+
+                font-size: 34px;
+
+            }
+
+
+            .info-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .profile-card {
+
+                padding: 20px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="logo">
+            INLIN<span>E</span>ASY
+        </div>
+
+
+        <button
+            class="back"
+            onclick="goHome()"
+        >
+            ← HOME
+        </button>
+
+    </header>
+
+
+    <!-- HEADING -->
+
+    <section class="heading">
+
+        <div class="eyebrow">
+            YOUR ACCOUNT
+        </div>
+
+        <h1>
+            Profile.
+        </h1>
+
+        <p class="subtitle">
+            Manage your INLINEASY account and orders.
+        </p>
+
+    </section>
+
+
+    <!-- PROFILE -->
+
+    <section class="profile-card">
+
+        <div class="profile-top">
+
+            <div
+                class="avatar"
+                id="avatar"
+            >
+                U
+            </div>
+
+
+            <div>
+
+                <div
+                    class="profile-name"
+                    id="name"
+                >
+                    User
+                </div>
+
+                <div
+                    class="profile-email"
+                    id="email"
+                >
+                    —
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-grid">
+
+
+            <div class="info">
+
+                <small>
+                    PHONE NUMBER
+                </small>
+
+                <strong id="phone">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="info">
+
+                <small>
+                    TOTAL ORDERS
+                </small>
+
+                <strong
+                    id="ordersCount"
+                    style="color:#00FF42;"
+                >
+                    0
+                </strong>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- ACTIONS -->
+
+    <section class="actions">
+
+
+        <button
+            class="action primary"
+            onclick="openOrders()"
+        >
+            🧾 VIEW ORDER HISTORY →
+        </button>
+
+
+        <button
+            class="action"
+            onclick="openCart()"
+        >
+            🛒 VIEW CART →
+        </button>
+
+
+        <button
+            class="action"
+            onclick="openMenu()"
+        >
+            🍔 EXPLORE MENU →
+        </button>
+
+
+        <button
+            class="action logout"
+            onclick="logout()"
+        >
+            LOG OUT
+        </button>
+
+
+    </section>
+
+
+</div>
+
+
+<script>
+
+
+    /* USER DATA */
+
+    const userName =
+        localStorage.getItem("userName") ||
+        "User";
+
+
+    const phoneNumber =
+        localStorage.getItem("phoneNumber") ||
+        "Not available";
+
+
+    const email =
+        localStorage.getItem("email") ||
+        "Email not added";
+
+
+    const orders =
+        JSON.parse(
+            localStorage.getItem("orders")
+        ) || [];
+
+
+    document
+        .getElementById("name")
+        .textContent =
+            userName;
+
+
+    document
+        .getElementById("phone")
+        .textContent =
+            phoneNumber;
+
+
+    document
+        .getElementById("email")
+        .textContent =
+            email;
+
+
+    document
+        .getElementById("ordersCount")
+        .textContent =
+            orders.length;
+
+
+    document
+        .getElementById("avatar")
+        .textContent =
+            userName
+                .charAt(0)
+                .toUpperCase();
+
+
+    /* NAVIGATION */
+
+
+    function goHome() {
+
+        window.location.href =
+            "home.html";
+
+    }
+
+
+    function openOrders() {
+
+        window.location.href =
+            "orders.html";
+
+    }
+
+
+    function openCart() {
+
+        window.location.href =
+            "cart.html";
+
+    }
+
+
+    function openMenu() {
+
+        window.location.href =
+            "menu.html";
+
+    }
+
+
+    /* LOGOUT */
+
+    function logout() {
+
+        localStorage.removeItem("userName");
+
+        localStorage.removeItem("phoneNumber");
+
+        localStorage.removeItem("email");
+
+        window.location.href =
+            "login.html";
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

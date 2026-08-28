@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INLINEASY — Orders</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --neon: #00FF42;
+            --green: #00C853;
+            --black: #080808;
+            --surface: #111111;
+            --surface2: #161616;
+            --white: #FFFFFF;
+            --gray: #A8A8A8;
+            --border: #303030;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(
+                    circle at 85% 10%,
+                    rgba(0,255,66,0.08),
+                    transparent 30%
+                ),
+                var(--black);
+
+            color: var(--white);
+            font-family: "Manrope", sans-serif;
+            padding: 24px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 35px;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+        }
+
+        .logo span {
+            color: var(--neon);
+        }
+
+        .back {
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--gray);
+            padding: 10px 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .back:hover {
+            color: var(--white);
+            border-color: var(--neon);
+        }
+
+        .heading {
+            margin-bottom: 25px;
+        }
+
+        .eyebrow {
+            color: var(--neon);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 42px;
+            letter-spacing: -2px;
+        }
+
+        .subtitle {
+            color: var(--gray);
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .orders {
+            display: grid;
+            gap: 16px;
+        }
+
+        .order-card {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.055),
+                    rgba(255,255,255,0.015)
+                );
+
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 22px;
+            padding: 22px;
+        }
+
+        .order-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .order-id {
+            font-weight: 800;
+        }
+
+        .status {
+            color: #000;
+            background: var(--neon);
+            padding: 6px 10px;
+            border-radius: 50px;
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .items {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 0;
+            display: grid;
+            gap: 8px;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 12px;
+        }
+
+        .bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+        }
+
+        .total {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--neon);
+        }
+
+        .view {
+            border: none;
+            background: var(--neon);
+            color: #000;
+            padding: 11px 16px;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .view:hover {
+            background: var(--green);
+        }
+
+        .empty {
+            text-align: center;
+            padding: 70px 20px;
+            border: 1px dashed var(--border);
+            border-radius: 22px;
+            color: var(--gray);
+        }
+
+        .empty strong {
+            display: block;
+            color: var(--white);
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 34px;
+            }
+
+            .order-top {
+                align-items: flex-start;
+            }
+
+            .bottom {
+                align-items: flex-start;
+                gap: 15px;
+                flex-direction: column;
+            }
+
+            .view {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <header>
+
+        <div class="logo">
+            INLIN<span>E</span>ASY
+        </div>
+
+        <button
+            class="back"
+            onclick="goHome()"
+        >
+            ← HOME
+        </button>
+
+    </header>
+
+
+    <section class="heading">
+
+        <div class="eyebrow">
+            ORDER HISTORY
+        </div>
+
+        <h1>
+            Your orders.
+        </h1>
+
+        <p class="subtitle">
+            View your previous INLINEASY orders and bills.
+        </p>
+
+    </section>
+
+
+    <section
+        class="orders"
+        id="orders"
+    ></section>
+
+</div>
+
+
+<script>
+
+    const orders =
+        JSON.parse(
+            localStorage.getItem("orders")
+        ) || [];
+
+
+    const container =
+        document.getElementById("orders");
+
+
+    if (orders.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <strong>
+                    No orders yet
+                </strong>
+
+                Start ordering your favourite food
+                from INLINEASY.
+
+            </div>
+
+        `;
+
+    }
+
+
+    orders.forEach(
+        (order, index) => {
+
+            const card =
+                document.createElement("article");
+
+            card.className = "order-card";
+
+
+            const items =
+                (order.items || [])
+                .map(
+                    item => `
+
+                        <div class="item">
+
+                            <span>
+                                ${item.name}
+                                × ${item.quantity || 1}
+                            </span>
+
+                            <span>
+                                ₹${item.price * (item.quantity || 1)}
+                            </span>
+
+                        </div>
+
+                    `
+                )
+                .join("");
+
+
+            card.innerHTML = `
+
+                <div class="order-top">
+
+                    <div class="order-id">
+                        ${order.orderId}
+                    </div>
+
+                    <div class="status">
+                        ${order.status || "confirmed"}
+                    </div>
+
+                </div>
+
+
+                <div class="items">
+
+                    ${items}
+
+                </div>
+
+
+                <div class="bottom">
+
+                    <div>
+
+                        <div
+                            style="
+                                color:#777;
+                                font-size:9px;
+                                margin-bottom:4px;
+                            "
+                        >
+                            TOTAL
+                        </div>
+
+                        <div class="total">
+                            ₹${order.total}
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="view"
+                        onclick="viewOrder(${index})"
+                    >
+                        VIEW ORDER →
+                    </button>
+
+                </div>
+
+            `;
+
+
+            container.appendChild(card);
+
+        }
+    );
+
+
+    function viewOrder(index) {
+
+        localStorage.setItem(
+            "latestOrder",
+            JSON.stringify(orders[index])
+        );
+
+        window.location.href =
+            "success.html";
+
+    }
+
+
+    function goHome() {
+
+        window.location.href =
+            "home.html";
+
+    }
+
+</script>
+
+</body>
+</html>

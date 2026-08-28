@@ -819,24 +819,32 @@
             INLIN<span>E</span>ASY
         </div>
 
-        <div class="nav-actions">
+<div class="nav-actions">
 
-            <button
-                class="icon-btn"
-                onclick="openCart()"
-                aria-label="Cart"
-            >
-                🛒
-            </button>
+    <button
+        class="icon-btn"
+        onclick="openOrders()"
+        aria-label="Order History"
+    >
+        🧾
+    </button>
 
-            <div
-                class="profile"
-                id="profileInitial"
-            >
-                U
-            </div>
+    <button
+        class="icon-btn"
+        onclick="openCart()"
+        aria-label="Cart"
+    >
+        🛒
+    </button>
 
-        </div>
+    <div
+        class="profile"
+        id="profileInitial"
+    >
+        U
+    </div>
+
+</div>
 
     </nav>
 
@@ -1390,13 +1398,12 @@
             "menu.html";
 
     }
+	function openOrders() {
 
+    window.location.href =
+        "orders.html";
 
-    function openOrders() {
-
-        alert("Orders page coming next.");
-
-    }
+}
 
 
     function openProfile() {

@@ -827,7 +827,10 @@
 
                         <button
                             class="add-btn"
-                            onclick="addToCart('Classic Chicken Burger', 249, event)"
+                            onclick="addToCart(
+                                'Classic Chicken Burger',
+                                249
+                            )"
                         >
                             + ADD
                         </button>
@@ -890,7 +893,10 @@
 
                         <button
                             class="add-btn"
-                            onclick="addToCart('Loaded Cheese Pizza', 299, event)"
+                            onclick="addToCart(
+                                'Loaded Cheese Pizza',
+                                299
+                            )"
                         >
                             + ADD
                         </button>
@@ -953,7 +959,10 @@
 
                         <button
                             class="add-btn"
-                            onclick="addToCart('Spicy Schezwan Noodles', 199, event)"
+                            onclick="addToCart(
+                                'Spicy Schezwan Noodles',
+                                199
+                            )"
                         >
                             + ADD
                         </button>
@@ -1012,7 +1021,10 @@
 
                         <button
                             class="add-btn"
-                            onclick="addToCart('Double Cheese Burger', 329, event)"
+                            onclick="addToCart(
+                                'Double Cheese Burger',
+                                329
+                            )"
                         >
                             + ADD
                         </button>
@@ -1071,7 +1083,10 @@
 
                         <button
                             class="add-btn"
-                            onclick="addToCart('Veggie Supreme Pizza', 279, event)"
+                            onclick="addToCart(
+                                'Veggie Supreme Pizza',
+                                279
+                            )"
                         >
                             + ADD
                         </button>
@@ -1134,7 +1149,10 @@
 
                         <button
                             class="add-btn"
-                            onclick="addToCart('Fresh Lime Soda', 99, event)"
+                            onclick="addToCart(
+                                'Fresh Lime Soda',
+                                99
+                            )"
                         >
                             + ADD
                         </button>
@@ -1224,7 +1242,7 @@
     }
 
 
-    function addToCart(name, price, event) {
+    function addToCart(name, price) {
 
         const existing =
             cart.find(item =>

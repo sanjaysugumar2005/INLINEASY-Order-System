@@ -14,19 +14,15 @@ backend/*.sqlite3
 .env
 backend/.env
 
-# Backup database files
-*.backup.db
-
 # Editor / OS files
 .vscode/
 .idea/
 *.swp
 .DS_Store
 
-# Backup HTML files
-frontend/*.backup.html
-frontend/*.before-css-cleanup.html
-frontend/*.working.html
+# Development backup files
+*.backup*
+*.before*
 
-# All backup files
-frontend/*backup*.html
+# Temporary working files
+*.working*

@@ -1,6 +1,7 @@
 # Python virtual environment
 backend/venv/
-
+# Premium backup files
+frontend/*premium-backup*.html
 # Python cache
 __pycache__/
 *.pyc

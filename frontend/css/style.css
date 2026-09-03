@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INLINEASY | Vehicle Details</title>
+
+    <style>
+
+
+/* =========================================
+   INLINEASY — BUNKTWO PAGE
+   SAME MASTER DESIGN
+========================================= */
+
+.container {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 40px;
+    background: #111111;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 22px;
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.65),
+        0 0 35px rgba(0, 255, 66, 0.05);
+}
+
+.logo {
+    text-align: center;
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 32px;
+}
+
+.logo span {
+    color: #00FF42;
+    text-shadow: 0 0 15px rgba(0, 255, 66, 0.5);
+}
+
+.page-title {
+    color: #ffffff;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 800;
+    margin-bottom: 25px;
+}
+
+.status-box {
+    background: #0b0b0b;
+    border: 1px solid rgba(0, 255, 66, 0.15);
+    border-radius: 16px;
+    padding: 17px;
+    margin-bottom: 25px;
+}
+
+.status-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.status-title {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #00FF42;
+    font-size: 10px;
+    font-weight: 900;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #00FF42;
+    box-shadow: 0 0 12px rgba(0, 255, 66, 0.8);
+}
+
+.status-line {
+    height: 1px;
+    width: 100%;
+    margin-top: 14px;
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.welcome {
+    text-align: center;
+    color: #888888;
+    font-size: 12px;
+    margin-bottom: 25px;
+}
+
+.welcome strong {
+    color: #ffffff;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #d0d0d0;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    color: #777777;
+}
+
+.input-wrapper input {
+    width: 100%;
+    height: 54px;
+    padding: 10px 13px 10px 42px;
+    background: #0b0b0b;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 13px;
+    outline: none;
+    font-family: inherit;
+    transition: 0.25s ease;
+}
+
+.input-wrapper input::placeholder {
+    color: #666666;
+}
+
+.input-wrapper input:focus {
+    border-color: #00FF42;
+    box-shadow:
+        0 0 0 3px rgba(0, 255, 66, 0.10),
+        0 0 25px rgba(0, 255, 66, 0.06);
+}
+
+.car-example {
+    color: #666666;
+    font-size: 9px;
+    margin-top: 7px;
+}
+
+.error {
+    color: #ff4d4d;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 12px;
+}
+
+button {
+    width: 100%;
+    height: 54px;
+    border: none;
+    border-radius: 13px;
+    background: #00FF42 !important;
+    color: #000000 !important;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+    transition: 0.25s ease;
+    box-shadow: 0 8px 25px rgba(0, 255, 66, 0.18);
+}
+
+button:hover {
+    background: #00FF42 !important;
+    color: #000000 !important;
+    transform: translateY(-2px);
+    box-shadow:
+        0 14px 35px rgba(0, 255, 66, 0.28),
+        0 0 25px rgba(0, 255, 66, 0.10);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.footer {
+    text-align: center;
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    color: #666666;
+    font-size: 9px;
+}
+
+.footer strong {
+    color: #ffffff;
+}
+
+.footer span {
+    color: #00FF42;
+}
+
+
+/* =========================================
+   BUNKTWO MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .container {
+        padding: 32px 22px;
+        border-radius: 20px;
+    }
+
+    .logo {
+        font-size: 26px;
+    }
+
+    .page-title {
+        font-size: 23px;
+    }
+
+}
+        /* =========================================
+
+
+           INLINEASY — BUNKTWO
+           PREMIUM GREEN / BLACK / WHITE
+        ========================================= */
+
+        :root {
+            --green: #00FF42;
+            --black: #050505;
+            --card: #0b0b0b;
+            --input: #111111;
+            --white: #ffffff;
+            --muted: #777777;
+            --border: rgba(255, 255, 255, 0.09);
+            --green-glow: rgba(0, 255, 66, 0.22);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    rgba(0, 255, 66, 0.045),
+                    transparent 35%
+                ),
+                var(--black);
+
+            color: var(--white);
+
+            font-family:
+                "Posterama1919",
+                Arial,
+                sans-serif;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 24px 16px;
+        }
+
+        /* =========================
+           MAIN CONTAINER
+        ========================== */
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+            border-radius: 26px;
+
+            padding: 40px;
+
+            position: relative;
+            overflow: hidden;
+
+            box-shadow:
+                0 30px 90px rgba(0, 0, 0, 0.75),
+                0 0 50px rgba(0, 255, 66, 0.04);
+        }
+
+        .container::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 10%;
+
+            width: 80%;
+            height: 2px;
+
+            background: var(--green);
+
+            box-shadow:
+                0 0 15px rgba(0, 255, 66, 0.75),
+                0 0 35px rgba(0, 255, 66, 0.20);
+        }
+
+        /* =========================
+           LOGO
+        ========================== */
+
+        .logo {
+            text-align: center;
+
+            color: var(--white);
+
+            font-size: 30px;
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 32px;
+        }
+
+        .logo span {
+            color: var(--green);
+
+            text-shadow:
+                0 0 12px rgba(0, 255, 66, 0.65);
+        }
+
+        /* =========================
+           PAGE TITLE
+        ========================== */
+
+        .page-title {
+            text-align: center;
+
+            color: var(--white);
+
+            font-size: 25px;
+            font-weight: 800;
+
+            margin-bottom: 24px;
+        }
+
+        /* =========================
+           STATUS BOX
+        ========================== */
+
+        .status-box {
+            background: var(--input);
+
+            border: 1px solid rgba(0, 255, 66, 0.16);
+
+            border-radius: 16px;
+
+            padding: 17px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 0 25px rgba(0, 255, 66, 0.035);
+        }
+
+        .status-top {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 15px;
+        }
+
+        .status-title {
+            color: var(--white);
+
+            font-size: 12px;
+            font-weight: 800;
+
+            letter-spacing: 0.6px;
+        }
+
+        .status {
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: var(--green);
+
+            font-size: 10px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: var(--green);
+
+            box-shadow:
+                0 0 8px rgba(0, 255, 66, 0.9),
+                0 0 16px rgba(0, 255, 66, 0.4);
+        }
+
+        .status-line {
+            width: 100%;
+            height: 1px;
+
+            margin-top: 14px;
+
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        /* =========================
+           WELCOME
+        ========================== */
+
+        .welcome {
+            text-align: center;
+
+            color: #888888;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+
+            margin-bottom: 25px;
+        }
+
+        .welcome strong {
+            color: var(--white);
+        }
+
+        /* =========================
+           FORM
+        ========================== */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+
+            color: #d0d0d0;
+
+            font-size: 10px;
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+
+            left: 14px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #777777;
+
+            font-size: 14px;
+
+            z-index: 2;
+
+            transition: 0.25s ease;
+        }
+
+        .input-wrapper:hover .input-icon {
+            color: var(--green);
+        }
+
+        input {
+            width: 100%;
+            height: 54px;
+
+            padding:
+                10px 13px 10px 42px;
+
+            background: var(--input);
+
+            border: 1px solid var(--border);
+
+            border-radius: 13px;
+
+            color: var(--white);
+
+            font-family: inherit;
+            font-size: 13px;
+
+            outline: none;
+
+            transition: 0.25s ease;
+        }
+
+        input::placeholder {
+            color: #666666;
+        }
+
+        input:hover {
+            border-color: rgba(0, 255, 66, 0.25);
+        }
+
+        input:focus {
+            border-color: var(--green);
+
+            box-shadow:
+                0 0 0 3px rgba(0, 255, 66, 0.10),
+                0 0 25px rgba(0, 255, 66, 0.07);
+        }
+
+        /* =========================
+           EXAMPLE
+        ========================== */
+
+        .car-example {
+            color: #666666;
+
+            font-size: 9px;
+
+            margin-top: 7px;
+        }
+
+        /* =========================
+           ERROR
+        ========================== */
+
+        .error {
+            display: none;
+
+            color: #ff4d4d;
+
+            font-size: 12px;
+
+            text-align: center;
+
+            margin-top: 12px;
+        }
+
+        /* =========================
+           CONTINUE BUTTON
+        ========================== */
+
+        .continue-btn {
+            width: 100%;
+
+            height: 54px;
+
+            margin-top: 6px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            background: var(--green);
+
+            color: #000000;
+
+            font-family: inherit;
+
+            font-size: 12px;
+            font-weight: 900;
+
+            letter-spacing: 0.8px;
+
+            cursor: pointer;
+
+            position: relative;
+
+            overflow: hidden;
+
+            transition: 0.25s ease;
+
+            box-shadow:
+                0 8px 25px rgba(0, 255, 66, 0.14);
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 14px 35px rgba(0, 255, 66, 0.25),
+                0 0 25px rgba(0, 255, 66, 0.10);
+        }
+
+        .continue-btn:active {
+            transform: scale(0.98);
+        }
+
+        .continue-btn::after {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: -100%;
+
+            width: 65%;
+            height: 100%;
+
+            background:
+                rgba(255, 255, 255, 0.20);
+
+            transform: skewX(-20deg);
+
+            transition: 0.5s ease;
+        }
+
+        .continue-btn:hover::after {
+            left: 130%;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        .footer {
+            text-align: center;
+
+            margin-top: 24px;
+
+            padding-top: 18px;
+
+            border-top:
+                1px solid rgba(255, 255, 255, 0.07);
+
+            color: #666666;
+
+            font-size: 9px;
+        }
+
+        .footer strong {
+            color: var(--white);
+        }
+
+        .footer span {
+            color: var(--green);
+        }
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 16px 12px;
+            }
+
+            .container {
+                max-width: 100%;
+
+                padding: 32px 22px;
+
+                border-radius: 22px;
+            }
+
+            .logo {
+                font-size: 26px;
+
+                margin-bottom: 28px;
+            }
+
+            .page-title {
+                font-size: 23px;
+            }
+
+            .status-box {
+                padding: 16px;
+            }
+
+            input,
+            .continue-btn {
+                height: 52px;
+            }
+        }
+
+        @media (max-width: 380px) {
+
+            .container {
+                padding: 28px 18px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .page-title {
+                font-size: 22px;
+            }
+
+            input,
+            .continue-btn {
+                height: 50px;
+            }
+        }
+
+/* =========================================
+   BUNKTWO — CONTINUE BUTTON
+========================================= */
+
+button {
+    background: #00FF42 !important;
+    color: #000000 !important;
+    border: none !important;
+    font-weight: 900 !important;
+    box-shadow:
+        0 8px 25px rgba(0, 255, 66, 0.18);
+}
+
+button:hover {
+    background: #00FF42 !important;
+    color: #000000 !important;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 14px 35px rgba(0, 255, 66, 0.28),
+        0 0 25px rgba(0, 255, 66, 0.10);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- LOGO -->
+
+        <div class="logo">
+            INLIN<span>E</span>ASY
+        </div>
+
+        <!-- TITLE -->
+
+        <div class="page-title">
+            Vehicle Details
+        </div>
+
+        <!-- STATION STATUS -->
+
+        <div class="status-box">
+
+            <div class="status-top">
+
+                <div class="status-title">
+                    CNG Station Status
+                </div>
+
+                <div class="status">
+                    <div class="status-dot"></div>
+                    OPEN
+                </div>
+
+            </div>
+
+            <div class="status-line"></div>
+
+        </div>
+
+        <!-- WELCOME -->
+
+        <p class="welcome">
+            Welcome,
+            <strong id="displayUserName">User</strong>
+        </p>
+
+        <!-- VEHICLE NUMBER -->
+
+        <div class="form-group">
+
+            <label for="carNumber">
+                VEHICLE REGISTRATION NUMBER
+            </label>
+
+            <div class="input-wrapper">
+
+                <div class="input-icon">
+                    🚗
+                </div>
+
+                <input
+                    type="text"
+                    id="carNumber"
+                    placeholder="TN31BE2345"
+                    maxlength="10"
+                    autocomplete="off"
+                >
+
+            </div>
+
+            <p class="car-example">
+                Example: TN31NS1234
+            </p>
+
+        </div>
+
+        <!-- VEHICLE MODEL -->
+
+        <div class="form-group">
+
+            <label for="carModel">
+                VEHICLE MODEL
+            </label>
+
+            <div class="input-wrapper">
+
+                <div class="input-icon">
+                    ◆
+                </div>
+
+                <input
+                    type="text"
+                    id="carModel"
+                    placeholder="ALTO"
+                    maxlength="30"
+                    autocomplete="off"
+                >
+
+            </div>
+
+        </div>
+
+        <!-- ERROR -->
+
+        <p
+            id="errorMessage"
+            class="error">
+        </p>
+
+        <!-- CONTINUE -->
+
+        <button
+            type="button"
+            class="continue-btn"
+            onclick="continueToBooking()">
+            CONTINUE TO SLOT BOOKING
+        </button>
+
+        <!-- FOOTER -->
+
+        <div class="footer">
+
+            <strong>INLINEASY</strong>
+
+            <span>•</span>
+
+            Smart Slot Booking
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         BUNKTWO SCRIPT
+    ========================================== -->
+
+    <script>
+
+        /*
+         * INLINEASY
+         * Vehicle Details
+         */
+
+        const userName =
+            localStorage.getItem("userName");
+
+        const displayUserName =
+            document.getElementById("displayUserName");
+
+        const carNumberInput =
+            document.getElementById("carNumber");
+
+        const carModelInput =
+            document.getElementById("carModel");
+
+        const errorMessage =
+            document.getElementById("errorMessage");
+
+
+        /* USER NAME */
+
+        if (userName && displayUserName) {
+
+            displayUserName.textContent =
+                userName;
+
+        }
+
+
+        /* VEHICLE NUMBER */
+
+        if (carNumberInput) {
+
+            carNumberInput.value =
+                localStorage.getItem("carNumber") || "";
+
+            carNumberInput.addEventListener(
+                "input",
+                function () {
+
+                    this.value =
+                        this.value
+                            .toUpperCase()
+                            .replace(/\s/g, "");
+
+                }
+            );
+
+        }
+
+
+        /* VEHICLE MODEL */
+
+        if (carModelInput) {
+
+            carModelInput.value =
+                localStorage.getItem("carModel") || "";
+
+        }
+
+
+        /* VALIDATE VEHICLE NUMBER */
+
+        function isValidCarNumber(number) {
+
+            return /^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}$/
+                .test(number);
+
+        }
+
+
+        /* SHOW ERROR */
+
+        function showError(message) {
+
+            if (!errorMessage) {
+                return;
+            }
+
+            errorMessage.textContent =
+                message;
+
+            errorMessage.style.display =
+                "block";
+
+        }
+
+
+        /* HIDE ERROR */
+
+        function hideError() {
+
+            if (!errorMessage) {
+                return;
+            }
+
+            errorMessage.textContent =
+                "";
+
+            errorMessage.style.display =
+                "none";
+
+        }
+
+
+        /* CONTINUE */
+
+        function continueToBooking() {
+
+            hideError();
+
+            const carNumber =
+                carNumberInput.value
+                    .trim()
+                    .toUpperCase();
+
+            const carModel =
+                carModelInput.value
+                    .trim();
+
+
+            /* VEHICLE NUMBER REQUIRED */
+
+            if (!carNumber) {
+
+                showError(
+                    "Please enter your vehicle registration number."
+                );
+
+                carNumberInput.focus();
+
+                return;
+
+            }
+
+
+            /* VEHICLE NUMBER FORMAT */
+
+            if (!isValidCarNumber(carNumber)) {
+
+                showError(
+                    "Enter a valid vehicle number. Example: TN31NS1234"
+                );
+
+                carNumberInput.focus();
+
+                return;
+
+            }
+
+
+            /* VEHICLE MODEL REQUIRED */
+
+            if (!carModel) {
+
+                showError(
+                    "Please enter your vehicle model."
+                );
+
+                carModelInput.focus();
+
+                return;
+
+            }
+
+
+            /* SAVE VEHICLE DETAILS */
+
+            localStorage.setItem(
+                "carNumber",
+                carNumber
+            );
+
+            localStorage.setItem(
+                "carModel",
+                carModel
+            );
+
+
+            /* NEXT PAGE */
+
+            window.location.href =
+                "bookingthree.html";
+
+        }
+
+
+        /* ENTER KEY SUPPORT */
+
+        if (carNumberInput) {
+
+            carNumberInput.addEventListener(
+                "keydown",
+                function (event) {
+
+                    if (event.key === "Enter") {
+
+                        continueToBooking();
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        if (carModelInput) {
+
+            carModelInput.addEventListener(
+                "keydown",
+                function (event) {
+
+                    if (event.key === "Enter") {
+
+                        continueToBooking();
+
+                    }
+
+                }
+            );
+
+        }
+
+    </script>
+
+</body>
+
+</html>
